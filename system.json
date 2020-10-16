@@ -17,8 +17,8 @@
   "gridUnits": "ft",
   "primaryTokenAttribute": "health",
   "secondaryTokenAttribute": "power",
-  "url": "",
-  "manifest": "",
-  "download": "",
+  "url": "https://github.com/ksx0330/FVTT-Insane-System",
+  "manifest": "https://raw.githubusercontent.com/ksx0330/FVTT-Insane-System/main/system.json",
+  "download": "https://codeload.github.com/ksx0330/FVTT-Insane-System/zip/main",
   "license": "LICENSE.txt"
 }
