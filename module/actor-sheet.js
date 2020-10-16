@@ -22,10 +22,6 @@ export class InsaneActorSheet extends ActorSheet {
   getData() {
     const data = super.getData();
     data.dtypes = ["String", "Number", "Boolean"];
-    for ( let attr of Object.values(data.data.attributes) ) {
-      attr.isCheckbox = attr.dtype === "Boolean";
-    }
-
 
     data.data.tables = [];
     for (var i = 2; i <= 12; ++i) {
