@@ -1,0 +1,280 @@
+<form class="{{cssClass}}" autocomplete="off">
+
+    {{!-- Sheet Header --}}
+    <header class="sheet-header">
+        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
+        <div class="header-fields">
+            <h1 class="charname">
+              <input name="name" type="text" value="{{actor.name}}" placeholder="Name"/>
+              <a class="inline-roll" data-flavor="{{actor.name}}" data-formula="2d6"><i class="fas fa-dice"></i></a>
+            </h1>
+            <div class="resource quater-width">
+                <span>생명력</span>
+                <input type="text" class="number-input" name="data.health.value" value="{{data.health.value}}" data-dtype="Number"/>
+                <span> / </span>
+                <input type="text" class="number-input" name="data.health.max" value="{{data.health.max}}" data-dtype="Number"/>
+            </div>
+            <div class="resource quater-width">
+                <span>이성치</span>
+                <input type="text" class="number-input" name="data.sanity.value" value="{{data.sanity.value}}" data-dtype="Number"/>
+                <span> / </span>
+                <input type="text" class="number-input" name="data.sanity.max" value="{{data.sanity.max}}" data-dtype="Number"/>
+            </div>
+
+            <div class="resource quater-width">
+                <span>호기심</span>
+                <select name="data.curiosity">
+                    {{#select data.curiosity}}
+                    <option value="0">-</option>
+                    <option value="1">{{localize "INSANE.A1"}}</option>
+                    <option value="2">{{localize "INSANE.B1"}}</option>
+                    <option value="3">{{localize "INSANE.C1"}}</option>
+                    <option value="4">{{localize "INSANE.D1"}}</option>
+                    <option value="5">{{localize "INSANE.E1"}}</option>
+                    <option value="6">{{localize "INSANE.F1"}}</option>
+                    {{/select}}
+                </select>
+            </div>
+
+            <div class="resource quater-width">
+                <span>공포심</span>
+                <input type="text" class="string-input" name="data.fear" value="{{data.fear}}">
+            </div>
+        </div>
+    </header>
+
+    <div class="talent-table">
+        <table>
+            <colgroup>
+                <col span="1" style="width: 5%;">
+                <col span="1" style="width: 2%;">
+                <col span="1" style="width: 10%;">
+                <col span="1" style="width: 2%;">
+                <col span="1" style="width: 10%;">
+                <col span="1" style="width: 2%;">
+                <col span="1" style="width: 10%;">
+                <col span="1" style="width: 2%;">
+                <col span="1" style="width: 10%;">
+                <col span="1" style="width: 2%;">
+                <col span="1" style="width: 10%;">
+                <col span="1" style="width: 2%;">
+                <col span="1" style="width: 10%;">
+                <col span="1" style="width: 5%;">
+            </colgroup>
+
+            <tbody>
+                <tr>
+                    <th></th>
+                    <td></td>
+                    <th>{{localize "INSANE.A1"}}</th>
+                    <td></td>
+                    <th>{{localize "INSANE.B1"}}</th>
+                    <td></td>
+                    <th>{{localize "INSANE.C1"}}</th>
+                    <td></td>
+                    <th>{{localize "INSANE.D1"}}</th>
+                    <td></td>
+                    <th>{{localize "INSANE.E1"}}</th>
+                    <td></td>
+                    <th>{{localize "INSANE.F1"}}</th>
+                    <th></th>
+                </tr>
+                {{#each data.tables}}  
+                <tr>
+                    <th>{{number}}</th>
+                    <td {{#ifEquals ../data.curiosity 1}} class="active" {{/ifEquals}}></td>
+                    <td {{#if line.[0].check}} class="checked" {{/if}} >
+                        <input class="talent-checkbox" type="checkbox" name="{{line.[0].name}}" {{#if line.[0].check}} checked {{/if}} >
+                        <label class="talent-name">{{localize line.[0].title}}</label>
+                    </td>
+                    <td {{#ifOrEquals ../data.curiosity 1 ../data.curiosity 2}} class="active" {{/ifOrEquals}}></td>
+                    <td {{#if line.[1].check}} class="checked" {{/if}} >
+                        <input class="talent-checkbox" type="checkbox" name="{{line.[1].name}}" {{#if line.[1].check}} checked {{/if}} >
+                        <label class="talent-name">{{localize line.[1].title}}</label>
+                    </td>
+                    <td {{#ifOrEquals ../data.curiosity 2 ../data.curiosity 3}} class="active" {{/ifOrEquals}}></td>
+                    <td {{#if line.[2].check}} class="checked" {{/if}} >
+                        <input class="talent-checkbox" type="checkbox" name="{{line.[2].name}}" {{#if line.[2].check}} checked {{/if}} >
+                        <label class="talent-name">{{localize line.[2].title}}</label>
+                    </td>
+                    <td {{#ifOrEquals ../data.curiosity 3 ../data.curiosity 4}} class="active" {{/ifOrEquals}}></td>
+                    <td {{#if line.[3].check}} class="checked" {{/if}} >
+                        <input class="talent-checkbox" type="checkbox" name="{{line.[3].name}}" {{#if line.[3].check}} checked {{/if}} >
+                        <label class="talent-name">{{localize line.[3].title}}</label>
+                    </td>
+                    <td {{#ifOrEquals ../data.curiosity 4 ../data.curiosity 5}} class="active" {{/ifOrEquals}}></td>
+                    <td {{#if line.[4].check}} class="checked" {{/if}} >
+                        <input class="talent-checkbox" type="checkbox" name="{{line.[4].name}}" {{#if line.[4].check}} checked {{/if}} >
+                        <label class="talent-name">{{localize line.[4].title}}</label>
+                    </td>
+                    <td {{#ifOrEquals ../data.curiosity 5 ../data.curiosity 6}} class="active" {{/ifOrEquals}}></td>
+                    <td {{#if line.[5].check}} class="checked" {{/if}} >
+                        <input class="talent-checkbox" type="checkbox" name="{{line.[5].name}}" {{#if line.[5].check}} checked {{/if}} >
+                        <label class="talent-name">{{localize line.[5].title}}</label>
+                    </td>
+                    <th>{{number}}</th>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+
+    </div>
+
+
+    {{!-- Sheet Tab Navigation --}}
+    <nav class="sheet-tabs tabs" data-group="primary">
+        <a class="item" data-tab="description">Description</a>
+        <a class="item" data-tab="ability">Ability</a>
+        <a class="item" data-tab="bonds">Bonds</a>
+        <a class="item" data-tab="items">Items</a>
+    </nav>
+
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Biography Tab --}}
+        <div class="tab biography" data-group="primary" data-tab="description">
+            <h2>Basic</h2>
+            <table>
+                <tr>
+                    <th>나이</th>
+                    <td><input type="text" name="data.details.age" value="{{data.details.age}}"></td>
+                    <th>성별</th>
+                    <td><input type="text" name="data.details.sex" value="{{data.details.sex}}"></td>
+                </tr>
+                <tr>
+                    <th>직업</th>
+                    <td><input type="text" name="data.details.job" value="{{data.details.job}}"></td>
+                    <th>공적점</th>
+                    <td><input type="text" name="data.details.exp" value="{{data.details.exp}}"></td>
+                </tr>
+
+            </table>
+            <h2>Memo</h2>
+            {{editor content=data.datails.biography target="data.details.biography" button=true owner=owner editable=editable}}
+        </div>
+
+        {{!-- Owned Ability Tab --}}
+        <div class="tab items" data-group="primary" data-tab="ability">
+          <div class="cell cell--common-talent">
+            <h2 class="cell--title">
+              <label>어빌리티 리스트</label>
+              <div class="item-controls">
+                <button class="item-control item-create" data-type="ability">
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+            </h2>
+            <ol class="items-list">
+            {{#each actor.abilityList as |item id|}}
+              <li class="item flexrow" data-item-id="{{item._id}}" draggable="true">
+                
+                <h4 class="item-name">
+                    <span class="echo-item">
+                        <i class="fas fa-book"></i>
+                    </span> 
+                    <span class="item-label">{{item.name}} |
+                        <b>타입</b> : {{item.data.type}} |
+                        <b>지정특기</b> : {{item.data.talent}}
+
+                        <span class="item-details-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </span>
+                </h4>
+                <div class="item-controls">
+                  <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                  <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                </div>
+                <div class="item-description">
+                  <p>{{{item.data.description}}}</p>
+                </div>
+              </li>
+            {{/each}}
+            </ol>
+          </div>
+        </div>
+
+        {{!-- Owned Bonds Tab --}}
+        <div class="tab items" data-group="primary" data-tab="bonds">
+          <div class="cell cell--common-talent">
+            <h2 class="cell--title">
+              <label>감정 리스트</label>
+              <div class="item-controls">
+                <button class="item-control item-create" data-type="bond">
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+            </h2>
+            <ol class="items-list">
+            {{#each actor.bondList as |item id|}}
+              <li class="item flexrow" data-item-id="{{item._id}}" draggable="true">
+                
+                <h4 class="item-name">
+                    <span class="echo-item">
+                        <i class="fas fa-book"></i>
+                    </span> 
+                    <span class="item-label">{{item.name}} |
+                        <b>거처</b> : {{#if item.data.residence}} O {{else}} X {{/if}} | 
+                        <b>비밀</b> : {{#if item.data.secret}} O {{else}} X {{/if}} | 
+                        <b>감정</b> : {{item.data.feeling}}
+                        <span class="item-details-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </span>
+                </h4>
+                <div class="item-controls">
+                  <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                  <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                </div>
+                <div class="item-description">
+                        <p>{{{item.data.description}}}</p>
+                </div>
+              </li>
+            {{/each}}
+            </ol>
+          </div>
+        </div>
+
+        {{!-- Owned Items Tab --}}
+        <div class="tab items" data-group="primary" data-tab="items">
+          <div class="cell cell--common-talent">
+            <h2 class="cell--title">
+              <label>아이템 리스트</label>
+              <div class="item-controls">
+                <button class="item-control item-create" data-type="item" >
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+            </h2>
+            <ol class="items-list">
+            {{#each actor.itemList as |item id|}}
+              <li class="item flexrow" data-item-id="{{item._id}}" draggable="true">
+                
+                <h4 class="item-name">
+                    <span class="echo-item">
+                        <i class="fas fa-book"></i>
+                    </span> 
+                    <span class="item-label">{{item.name}} X {{item.data.quantity}}
+                        <span class="item-details-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </span>
+                </h4>
+                <div class="item-controls">
+                  <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                  <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                </div>
+                <div class="item-description">
+                  <p>{{{item.data.description}}}</p>
+                  <button class="use-item">아이템 사용</button>
+                </div>
+              </li>
+            {{/each}}
+            </ol>
+          </div>
+        </div>
+
+    </section>
+</form>
+

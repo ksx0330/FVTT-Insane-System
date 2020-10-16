@@ -1,0 +1,54 @@
+{
+"Actor": {
+  "types": ["character"],
+  "character": {
+    "health": {
+      "value": 6,
+      "min": 0,
+      "max": 6
+    },
+    "sanity": {
+      "value": 6,
+      "min": 0,
+      "max": 6
+    },
+    "talent": {
+        "table":[ 
+            [false, false, false, false, false, false, false, false, false, false, false],
+            [false, false, false, false, false, false, false, false, false, false, false], 
+            [false, false, false, false, false, false, false, false, false, false, false], 
+            [false, false, false, false, false, false, false, false, false, false, false], 
+            [false, false, false, false, false, false, false, false, false, false, false], 
+            [false, false, false, false, false, false, false, false, false, false, false] 
+        ],
+        "curiosity": 0,
+        "fear": ""
+    },
+    "details": {
+        "age": "",
+        "sex": "",
+        "job": "",
+        "exp": "",
+        "biography": ""
+    }
+  }
+},
+"Item": {
+    "types": ["bond", "ability", "item"],
+    "bond": {
+        "residence": false,
+        "secret": false,
+        "feeling": "",
+        "description": ""
+    },
+    "ability": {
+        "type": "",
+        "talent": "",
+        "description": ""
+    },
+    "item": {
+        "description": "",
+        "quantity": 1
+    }
+}
+}
