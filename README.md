@@ -8,7 +8,7 @@ Installation Instructions
 To install the Insane system for Foundry Virtual Tabletop, simply paste the following URL into the Install System
 dialog on the Setup menu of the application.
 
-https://raw.githubusercontent.com/ksx0330/FVTT-Insane-System/master/system.json
+https://raw.githubusercontent.com/ksx0330/FVTT-Insane-System/main/system.json
 
 
 Recommanded Modules
