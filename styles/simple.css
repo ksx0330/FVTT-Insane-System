@@ -79,7 +79,7 @@
   text-shadow: none;
 }
 .insane .sheet-body {
-  overflow: hidden;
+  overflow: auto;
 }
 .insane .sheet-body .tab {
   height: 100%;
