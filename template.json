@@ -14,12 +14,12 @@
     },
     "talent": {
         "table":[ 
-            [false, false, false, false, false, false, false, false, false, false, false],
-            [false, false, false, false, false, false, false, false, false, false, false], 
-            [false, false, false, false, false, false, false, false, false, false, false], 
-            [false, false, false, false, false, false, false, false, false, false, false], 
-            [false, false, false, false, false, false, false, false, false, false, false], 
-            [false, false, false, false, false, false, false, false, false, false, false] 
+            [{"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}],
+            [{"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}], 
+            [{"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}], 
+            [{"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}], 
+            [{"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}], 
+            [{"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}, {"state": false, "num": 12}] 
         ],
         "curiosity": 0,
         "fear": ""
