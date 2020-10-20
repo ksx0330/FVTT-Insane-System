@@ -28,7 +28,8 @@ export class InsaneActorSheet extends ActorSheet {
         data.data.tables.push({line: [], number: i});
         for (var j = 0; j < 6; ++j) {
             var name = String.fromCharCode(65 + j);
-            data.data.tables[i - 2].line.push({ id: `col-${i - 1}-${j}`, title: `INSANE.${name}${i}`, name: `data.talent.table.${j}.${i - 1}`, check: data.data.talent.table[j][i - 1] });
+            data.data.tables[i - 2].line.push({ id: `col-${i - 1}-${j}`, title: `INSANE.${name}${i}`, name: `data.talent.table.${j}.${i - 1}.state`, 
+                                                state: data.data.talent.table[j][i - 1].state, num: data.data.talent.table[j][i - 1].num });
         }
     }
 
@@ -58,6 +59,8 @@ export class InsaneActorSheet extends ActorSheet {
 
     // Everything below here is only needed if the sheet is editable
     if (!this.options.editable) return;
+
+    html.find(".talent-name").click(this._onRollTalent.bind(this));
 
     // Owned Item management
     html.find('.item-create').click(this._onItemCreate.bind(this));
@@ -107,6 +110,28 @@ export class InsaneActorSheet extends ActorSheet {
   }
 
   /* -------------------------------------------- */
+
+
+  async _onRollTalent(event) {
+    event.preventDefault();
+    num = event.currentTarget.dataset.num;
+
+    // GM rolls.
+    let chatData = {
+      user: game.user._id,
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      content: "<h3>" + title.text() + "</h3>" + description[0].innerHTML
+    };
+
+    let rollMode = game.settings.get("core", "rollMode");
+    if (["gmroll", "blindroll"].includes(rollMode)) chatData["whisper"] = ChatMessage.getWhisperRecipients("GM");
+    if (rollMode === "selfroll") chatData["whisper"] = [game.user._id];
+    if (rollMode === "blindroll") chatData["blind"] = true;
+
+    let roll = new Roll("2d6ms>=" + num);
+    roll.roll();
+    roll.render(charData);
+  }
 
 
     /* -------------------------------------------- */
