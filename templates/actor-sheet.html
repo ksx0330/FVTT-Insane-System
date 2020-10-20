@@ -83,34 +83,34 @@
                 <tr>
                     <th>{{number}}</th>
                     <td {{#ifEquals ../data.curiosity 1}} class="active" {{/ifEquals}}></td>
-                    <td {{#if line.[0].check}} class="checked" {{/if}} >
-                        <input class="talent-checkbox" type="checkbox" name="{{line.[0].name}}" {{#if line.[0].check}} checked {{/if}} >
-                        <label class="talent-name">{{localize line.[0].title}}</label>
+                    <td {{#if line.[0].state}} class="checked" {{/if}} >
+                        <input class="talent-checkbox" type="checkbox" name="{{line.[0].name}}" {{#if line.[0].state}} checked {{/if}} >
+                        <label class="talent-name" data-num="{{line.[0].num}}">{{localize line.[0].title}}</label>
                     </td>
                     <td {{#ifOrEquals ../data.curiosity 1 ../data.curiosity 2}} class="active" {{/ifOrEquals}}></td>
-                    <td {{#if line.[1].check}} class="checked" {{/if}} >
-                        <input class="talent-checkbox" type="checkbox" name="{{line.[1].name}}" {{#if line.[1].check}} checked {{/if}} >
-                        <label class="talent-name">{{localize line.[1].title}}</label>
+                    <td {{#if line.[1].state}} class="checked" {{/if}} >
+                        <input class="talent-checkbox" type="checkbox" name="{{line.[1].name}}" {{#if line.[1].state}} checked {{/if}} >
+                        <label class="talent-name" data-num="{{line.[1].num}}">{{localize line.[1].title}}</label>
                     </td>
                     <td {{#ifOrEquals ../data.curiosity 2 ../data.curiosity 3}} class="active" {{/ifOrEquals}}></td>
-                    <td {{#if line.[2].check}} class="checked" {{/if}} >
-                        <input class="talent-checkbox" type="checkbox" name="{{line.[2].name}}" {{#if line.[2].check}} checked {{/if}} >
-                        <label class="talent-name">{{localize line.[2].title}}</label>
+                    <td {{#if line.[2].state}} class="checked" {{/if}} >
+                        <input class="talent-checkbox" type="checkbox" name="{{line.[2].name}}" {{#if line.[2].state}} checked {{/if}} >
+                        <label class="talent-name" data-num="{{line.[2].num}}">{{localize line.[2].title}}</label>
                     </td>
                     <td {{#ifOrEquals ../data.curiosity 3 ../data.curiosity 4}} class="active" {{/ifOrEquals}}></td>
-                    <td {{#if line.[3].check}} class="checked" {{/if}} >
-                        <input class="talent-checkbox" type="checkbox" name="{{line.[3].name}}" {{#if line.[3].check}} checked {{/if}} >
-                        <label class="talent-name">{{localize line.[3].title}}</label>
+                    <td {{#if line.[3].state}} class="checked" {{/if}} >
+                        <input class="talent-checkbox" type="checkbox" name="{{line.[3].name}}" {{#if line.[3].state}} checked {{/if}} >
+                        <label class="talent-name" data-num="{{line.[3].num}}">{{localize line.[3].title}}</label>
                     </td>
                     <td {{#ifOrEquals ../data.curiosity 4 ../data.curiosity 5}} class="active" {{/ifOrEquals}}></td>
-                    <td {{#if line.[4].check}} class="checked" {{/if}} >
-                        <input class="talent-checkbox" type="checkbox" name="{{line.[4].name}}" {{#if line.[4].check}} checked {{/if}} >
-                        <label class="talent-name">{{localize line.[4].title}}</label>
+                    <td {{#if line.[4].state}} class="checked" {{/if}} >
+                        <input class="talent-checkbox" type="checkbox" name="{{line.[4].name}}" {{#if line.[4].state}} checked {{/if}} >
+                        <label class="talent-name" data-num="{{line.[4].num}}">{{localize line.[4].title}}</label>
                     </td>
                     <td {{#ifOrEquals ../data.curiosity 5 ../data.curiosity 6}} class="active" {{/ifOrEquals}}></td>
-                    <td {{#if line.[5].check}} class="checked" {{/if}} >
-                        <input class="talent-checkbox" type="checkbox" name="{{line.[5].name}}" {{#if line.[5].check}} checked {{/if}} >
-                        <label class="talent-name">{{localize line.[5].title}}</label>
+                    <td {{#if line.[5].state}} class="checked" {{/if}} >
+                        <input class="talent-checkbox" type="checkbox" name="{{line.[5].name}}" {{#if line.[5].state}} checked {{/if}} >
+                        <label class="talent-name" data-num="{{line.[5].num}}">{{localize line.[5].title}}</label>
                     </td>
                     <th>{{number}}</th>
                 </tr>
