@@ -5,10 +5,10 @@
 export class InsaneActorSheet extends ActorSheet {
 
   /** @override */
-	static get defaultOptions() {
-	  return mergeObject(super.defaultOptions, {
-  	  classes: ["insane", "sheet", "actor"],
-  	  template: "systems/insane/templates/actor-sheet.html",
+  static get defaultOptions() {
+    return mergeObject(super.defaultOptions, {
+      classes: ["insane", "sheet", "actor"],
+      template: "systems/insane/templates/actor-sheet.html",
       width: 800,
       height: 800,
       tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description"}],
@@ -54,7 +54,7 @@ export class InsaneActorSheet extends ActorSheet {
   /* -------------------------------------------- */
 
   /** @override */
-	activateListeners(html) {
+  activateListeners(html) {
     super.activateListeners(html);
 
     // Everything below here is only needed if the sheet is editable
@@ -114,13 +114,15 @@ export class InsaneActorSheet extends ActorSheet {
 
   async _onRollTalent(event) {
     event.preventDefault();
-    let num = event.currentTarget.dataset.num;
+    let dataset = event.currentTarget.dataset.num;
+    let num = dataset.num;
+    let title = dataset.name
 
     // GM rolls.
     let chatData = {
       user: game.user._id,
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-      content: "<h3>" + title.text() + "</h3>" + description[0].innerHTML
+      content: "<h3>" + title + "</h3>"
     };
 
     let rollMode = game.settings.get("core", "rollMode");
