@@ -116,7 +116,7 @@ export class InsaneActorSheet extends ActorSheet {
     event.preventDefault();
     let dataset = event.currentTarget.dataset.num;
     let num = dataset.num;
-    let title = dataset.name
+    let title = dataset.title;
 
     // GM rolls.
     let chatData = {
