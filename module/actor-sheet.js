@@ -132,7 +132,7 @@ export class InsaneActorSheet extends ActorSheet {
 
     let roll = new Roll("2d6ms>=" + num);
     roll.roll();
-    roll.render(charData);
+    roll.render(chatData);
   }
 
 
