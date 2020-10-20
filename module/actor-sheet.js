@@ -114,7 +114,7 @@ export class InsaneActorSheet extends ActorSheet {
 
   async _onRollTalent(event) {
     event.preventDefault();
-    let dataset = event.currentTarget.dataset.num;
+    let dataset = event.currentTarget.dataset;
     let num = dataset.num;
     let title = dataset.title;
 
