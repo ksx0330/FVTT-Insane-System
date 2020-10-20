@@ -7,8 +7,8 @@
   "compatibleCoreVersion": "0.6.6",
   "templateVersion": 1,
   "author": "ltaeng",
-  "esmodules": ["module/simple.js"],
-  "styles": ["styles/simple.css"],
+  "esmodules": ["module/insane.js"],
+  "styles": ["styles/insane.css"],
   "packs": [],
   "languages": [
         {"lang": "ko", "name": "Korean", "path": "lang/ko.json"}
@@ -16,7 +16,7 @@
   "gridDistance": 5,
   "gridUnits": "ft",
   "primaryTokenAttribute": "health",
-  "secondaryTokenAttribute": "power",
+  "secondaryTokenAttribute": "sanity",
   "url": "https://github.com/ksx0330/FVTT-Insane-System",
   "manifest": "https://raw.githubusercontent.com/ksx0330/FVTT-Insane-System/main/system.json",
   "download": "https://codeload.github.com/ksx0330/FVTT-Insane-System/zip/main",

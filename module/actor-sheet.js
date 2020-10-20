@@ -28,8 +28,7 @@ export class InsaneActorSheet extends ActorSheet {
         data.data.tables.push({line: [], number: i});
         for (var j = 0; j < 6; ++j) {
             var name = String.fromCharCode(65 + j);
-            data.data.tables[i - 2].line.push({ id: `col-${i}-${j}`, title: `INSANE.${name}${i}`, name: `data.talent.table.${j}.${i - 2}.state`, 
-                                                state: data.data.talent.table[j][i - 2].state, num: data.data.talent.table[j][i - 2].num });
+            data.data.tables[i - 2].line.push({ id: `col-${i}-${j}`, title: `INSANE.${name}${i}`, name: `data.talent.table.${j}.${i - 2}`, state: data.data.talent.table[j][i - 2].state, num: data.data.talent.table[j][i - 2].num });
         }
     }
 
@@ -111,6 +110,26 @@ export class InsaneActorSheet extends ActorSheet {
 
   /* -------------------------------------------- */
 
+  /** @override */
+  async _updateObject(event, formData) {
+    let target = event.currentTarget;
+
+    console.log(event);
+    if (target != undefined && target.name.indexOf("data.talent") == -1)
+      return this.object.update(formData);
+
+    await this.object.update(formData);
+
+    let table = this._getTalentTable();
+    for (var i = 0; i < 6; ++i)
+    for (var j = 0; j < 11; ++j)
+      formData[`data.talent.table.${i}.${j}.num`] = table[i][j].num;
+
+    return await this.object.update(formData);
+  }
+
+
+  /* -------------------------------------------- */
 
   async _onRollTalent(event) {
     event.preventDefault();
@@ -118,11 +137,14 @@ export class InsaneActorSheet extends ActorSheet {
     let num = dataset.num;
     let title = dataset.title;
 
+    if (title == this.actor.data.data.talent.fear)
+      num = String(Number(num) + 2);
+
     // GM rolls.
     let chatData = {
-      user: game.user._id,
-      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-      content: "<h3>" + title + "</h3>"
+        user: game.user._id,
+        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+        flavor: "<h2>" + title + "</h2>"
     };
 
     let rollMode = game.settings.get("core", "rollMode");
@@ -130,14 +152,24 @@ export class InsaneActorSheet extends ActorSheet {
     if (rollMode === "selfroll") chatData["whisper"] = [game.user._id];
     if (rollMode === "blindroll") chatData["blind"] = true;
 
-    let roll = new Roll("2d6ms>=" + num);
+    let roll = new Roll("2d6");
     roll.roll();
+    chatData.content = await renderTemplate("systems/insane/templates/roll.html", {
+        formula: roll.formula,
+        flavor: null,
+        user: game.user._id,
+        tooltip: await roll.getTooltip(),
+        total: Math.round(roll.total * 100) / 100,
+        num: num
+    });
 
-    let d = roll.render(chatData);
+    if (game.dice3d) {
+        game.dice3d.showForRoll(roll, chatData.whisper, chatData.blind).then(displayed => ChatMessage.create(chatData));
+    } else {
+        chatData.sound = CONFIG.sounds.dice;
+        ChatMessage.create(chatData);
+    }
 
-    console.log(d)
-
-    ChatMessage.create(d);
   }
 
 
@@ -204,7 +236,7 @@ export class InsaneActorSheet extends ActorSheet {
       let chatData = {
         user: game.user._id,
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        content: "<h3>" + "아이템 사용: " + item.data.name + "</h3>"
+        content: "<h3>" + game.i18n.localize("INSANE.UseItem") + ": " + item.data.name + "</h3>"
       };
   
       let rollMode = game.settings.get("core", "rollMode");
@@ -216,6 +248,53 @@ export class InsaneActorSheet extends ActorSheet {
 
     }
   
+  }
+
+  _getTalentTable() {
+    let table = JSON.parse(JSON.stringify(this.actor.data.data.talent.table));
+    let curiosity = this.actor.data.data.talent.curiosity;
+    let nodes = [];
+
+    for (var i = 0; i < 6; ++i)
+    for (var j = 0; j < 11; ++j) {
+      if (table[i][j].state == true) {
+        nodes.push({x: i, y: j});
+        table[i][j].num = "5";
+      } else
+        table[i][j].num = "12";
+    }
+        
+
+    let dx = [0, 0, 1, -1];
+    let dy = [1, -1, 0, 0];
+    let move = [1, 1, 2, 2];
+    for (var i = 0; i < nodes.length; ++i) {
+      let queue = [nodes[i]];
+
+      while (queue.length != 0) {
+        let now = queue[0];
+        queue.shift();
+
+        for (var d = 0; d < 4; ++d) {
+          var nx = now.x + dx[d];
+          var ny = now.y + dy[d];
+          var m = move[d];
+
+          if (nx < 0 || nx >= 6 || ny < 0 || ny >= 11)
+            continue;
+
+          if (m == 2 && (nx == curiosity - 1 || now.x == curiosity - 1))
+            m = 1;
+
+          if (Number(table[nx][ny].num) > Number(table[now.x][now.y].num) + m) {
+            table[nx][ny].num = String(Number(table[now.x][now.y].num) + m);
+            queue.push({x: nx, y: ny});
+          }
+        }
+      }
+    }
+
+    return table;
   }
 
 }

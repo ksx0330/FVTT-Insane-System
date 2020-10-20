@@ -9,22 +9,22 @@
               <a class="inline-roll" data-flavor="{{actor.name}}" data-formula="2d6"><i class="fas fa-dice"></i></a>
             </h1>
             <div class="resource quater-width">
-                <span>생명력</span>
+                <span>{{localize "INSANE.HP"}}</span>
                 <input type="text" class="number-input" name="data.health.value" value="{{data.health.value}}" data-dtype="Number"/>
                 <span> / </span>
                 <input type="text" class="number-input" name="data.health.max" value="{{data.health.max}}" data-dtype="Number"/>
             </div>
             <div class="resource quater-width">
-                <span>이성치</span>
+                <span>{{localize "INSANE.Sanity"}}</span>
                 <input type="text" class="number-input" name="data.sanity.value" value="{{data.sanity.value}}" data-dtype="Number"/>
                 <span> / </span>
                 <input type="text" class="number-input" name="data.sanity.max" value="{{data.sanity.max}}" data-dtype="Number"/>
             </div>
 
             <div class="resource quater-width">
-                <span>호기심</span>
-                <select name="data.curiosity">
-                    {{#select data.curiosity}}
+                <span>{{localize "INSANE.Curiosity"}}</span>
+                <select name="data.talent.curiosity">
+                    {{#select data.talent.curiosity}}
                     <option value="0">-</option>
                     <option value="1">{{localize "INSANE.A1"}}</option>
                     <option value="2">{{localize "INSANE.B1"}}</option>
@@ -37,8 +37,8 @@
             </div>
 
             <div class="resource quater-width">
-                <span>공포심</span>
-                <input type="text" class="string-input" name="data.fear" value="{{data.fear}}">
+                <span>{{localize "INSANE.Fear"}}</span>
+                <input type="text" class="string-input" name="data.talent.fear" value="{{data.talent.fear}}">
             </div>
         </div>
     </header>
@@ -82,34 +82,49 @@
                 {{#each data.tables}}  
                 <tr>
                     <th>{{number}}</th>
-                    <td {{#ifEquals ../data.curiosity 1}} class="active" {{/ifEquals}}></td>
+                    <td {{#ifEquals ../data.talent.curiosity 1}} class="active" {{/ifEquals}}></td>
                     <td {{#if line.[0].state}} class="checked" {{/if}} >
-                        <input class="talent-checkbox" type="checkbox" name="{{line.[0].name}}" {{#if line.[0].state}} checked {{/if}} >
+                        <input class="talent-checkbox" type="checkbox" name="{{line.[0].name}}.state" {{#if line.[0].state}} checked {{/if}} >
+                        <input type="hidden" name="{{line.[0].name}}.num" value="{{line.[0].num}}">
                         <label class="talent-name" data-title="{{localize line.[0].title}}" data-num="{{line.[0].num}}">{{localize line.[0].title}}</label>
                     </td>
-                    <td {{#ifOrEquals ../data.curiosity 1 ../data.curiosity 2}} class="active" {{/ifOrEquals}}></td>
+
+                    <td {{#ifOrEquals ../data.talent.curiosity 1 ../data.talent.curiosity 2}} class="active" {{/ifOrEquals}}></td>
                     <td {{#if line.[1].state}} class="checked" {{/if}} >
-                        <input class="talent-checkbox" type="checkbox" name="{{line.[1].name}}" {{#if line.[1].state}} checked {{/if}} >
+                        <input class="talent-checkbox" type="checkbox" name="{{line.[1].name}}.state" {{#if line.[1].state}} checked {{/if}} >
+                        <input type="hidden" name="{{line.[1].name}}.num" value="{{line.[1].num}}">
                         <label class="talent-name" data-title="{{localize line.[1].title}}" data-num="{{line.[1].num}}">{{localize line.[1].title}}</label>
                     </td>
-                    <td {{#ifOrEquals ../data.curiosity 2 ../data.curiosity 3}} class="active" {{/ifOrEquals}}></td>
+
+                    <td {{#ifOrEquals ../data.talent.curiosity 2 ../data.talent.curiosity 3}} class="active" {{/ifOrEquals}}></td>
+
                     <td {{#if line.[2].state}} class="checked" {{/if}} >
-                        <input class="talent-checkbox" type="checkbox" name="{{line.[2].name}}" {{#if line.[2].state}} checked {{/if}} >
+                        <input class="talent-checkbox" type="checkbox" name="{{line.[2].name}}.state" {{#if line.[2].state}} checked {{/if}} >
+                        <input type="hidden" name="{{line.[2].name}}.num" value="{{line.[2].num}}">
                         <label class="talent-name" data-title="{{localize line.[2].title}}" data-num="{{line.[2].num}}">{{localize line.[2].title}}</label>
                     </td>
-                    <td {{#ifOrEquals ../data.curiosity 3 ../data.curiosity 4}} class="active" {{/ifOrEquals}}></td>
+
+                    <td {{#ifOrEquals ../data.talent.curiosity 3 ../data.talent.curiosity 4}} class="active" {{/ifOrEquals}}></td>
+
                     <td {{#if line.[3].state}} class="checked" {{/if}} >
-                        <input class="talent-checkbox" type="checkbox" name="{{line.[3].name}}" {{#if line.[3].state}} checked {{/if}} >
+                        <input class="talent-checkbox" type="checkbox" name="{{line.[3].name}}.state" {{#if line.[3].state}} checked {{/if}} >
+                        <input type="hidden" name="{{line.[3].name}}.num" value="{{line.[3].num}}">
                         <label class="talent-name" data-title="{{localize line.[3].title}}" data-num="{{line.[3].num}}">{{localize line.[3].title}}</label>
                     </td>
-                    <td {{#ifOrEquals ../data.curiosity 4 ../data.curiosity 5}} class="active" {{/ifOrEquals}}></td>
+
+                    <td {{#ifOrEquals ../data.talent.curiosity 4 ../data.talent.curiosity 5}} class="active" {{/ifOrEquals}}></td>
+
                     <td {{#if line.[4].state}} class="checked" {{/if}} >
-                        <input class="talent-checkbox" type="checkbox" name="{{line.[4].name}}" {{#if line.[4].state}} checked {{/if}} >
+                        <input class="talent-checkbox" type="checkbox" name="{{line.[4].name}}.state" {{#if line.[4].state}} checked {{/if}} >
+                        <input type="hidden" name="{{line.[4].name}}.num" value="{{line.[4].num}}">
                         <label class="talent-name" data-title="{{localize line.[4].title}}" data-num="{{line.[4].num}}">{{localize line.[4].title}}</label>
                     </td>
-                    <td {{#ifOrEquals ../data.curiosity 5 ../data.curiosity 6}} class="active" {{/ifOrEquals}}></td>
+
+                    <td {{#ifOrEquals ../data.talent.curiosity 5 ../data.talent.curiosity 6}} class="active" {{/ifOrEquals}}></td>
+
                     <td {{#if line.[5].state}} class="checked" {{/if}} >
-                        <input class="talent-checkbox" type="checkbox" name="{{line.[5].name}}" {{#if line.[5].state}} checked {{/if}} >
+                        <input class="talent-checkbox" type="checkbox" name="{{line.[5].name}}.state" {{#if line.[5].state}} checked {{/if}} >
+                        <input type="hidden" name="{{line.[5].name}}.num" value="{{line.[5].num}}">
                         <label class="talent-name" data-title="{{localize line.[5].title}}" data-num="{{line.[5].num}}">{{localize line.[5].title}}</label>
                     </td>
                     <th>{{number}}</th>
@@ -123,10 +138,10 @@
 
     {{!-- Sheet Tab Navigation --}}
     <nav class="sheet-tabs tabs" data-group="primary">
-        <a class="item" data-tab="description">Description</a>
-        <a class="item" data-tab="ability">Ability</a>
-        <a class="item" data-tab="bonds">Bonds</a>
-        <a class="item" data-tab="items">Items</a>
+        <a class="item" data-tab="description">{{localize "INSANE.Description"}}</a>
+        <a class="item" data-tab="ability">{{localize "INSANE.Ability"}}</a>
+        <a class="item" data-tab="bonds">{{localize "INSANE.Bonds"}}</a>
+        <a class="item" data-tab="items">{{localize "INSANE.Items"}}</a>
     </nav>
 
     {{!-- Sheet Body --}}
@@ -134,23 +149,23 @@
 
         {{!-- Biography Tab --}}
         <div class="tab biography" data-group="primary" data-tab="description">
-            <h2>Basic</h2>
+            <h2>{{localize "INSANE.Basic"}}</h2>
             <table>
                 <tr>
-                    <th>나이</th>
+                    <th>{{localize "INSANE.Age"}}</th>
                     <td><input type="text" name="data.details.age" value="{{data.details.age}}"></td>
-                    <th>성별</th>
+                    <th>{{localize "INSANE.Gender"}}</th>
                     <td><input type="text" name="data.details.sex" value="{{data.details.sex}}"></td>
                 </tr>
                 <tr>
-                    <th>직업</th>
+                    <th>{{localize "INSANE.Job"}}</th>
                     <td><input type="text" name="data.details.job" value="{{data.details.job}}"></td>
-                    <th>공적점</th>
+                    <th>{{localize "INSANE.Exp"}}</th>
                     <td><input type="text" name="data.details.exp" value="{{data.details.exp}}"></td>
                 </tr>
 
             </table>
-            <h2>Memo</h2>
+            <h2>{{localize "INSANE.Memo"}}</h2>
             {{editor content=data.datails.biography target="data.details.biography" button=true owner=owner editable=editable}}
         </div>
 
@@ -158,7 +173,7 @@
         <div class="tab items" data-group="primary" data-tab="ability">
           <div class="cell cell--common-talent">
             <h2 class="cell--title">
-              <label>어빌리티 리스트</label>
+              <label>{{localize "INSANE.AbilityList"}}</label>
               <div class="item-controls">
                 <button class="item-control item-create" data-type="ability">
                   <i class="fas fa-plus"></i>
@@ -174,8 +189,8 @@
                         <i class="fas fa-book"></i>
                     </span> 
                     <span class="item-label">{{item.name}} |
-                        <b>타입</b> : {{item.data.type}} |
-                        <b>지정특기</b> : {{item.data.talent}}
+                        <b>{{localize "INSANE.Type"}}</b> : {{item.data.type}} |
+                        <b>{{localize "INSANE.Talent"}}</b> : {{item.data.talent}}
 
                         <span class="item-details-toggle">
                             <i class="fas fa-chevron-down"></i>
@@ -199,7 +214,7 @@
         <div class="tab items" data-group="primary" data-tab="bonds">
           <div class="cell cell--common-talent">
             <h2 class="cell--title">
-              <label>감정 리스트</label>
+              <label>{{localize "INSANE.BondsList"}}</label>
               <div class="item-controls">
                 <button class="item-control item-create" data-type="bond">
                   <i class="fas fa-plus"></i>
@@ -215,9 +230,9 @@
                         <i class="fas fa-book"></i>
                     </span> 
                     <span class="item-label">{{item.name}} |
-                        <b>거처</b> : {{#if item.data.residence}} O {{else}} X {{/if}} | 
-                        <b>비밀</b> : {{#if item.data.secret}} O {{else}} X {{/if}} | 
-                        <b>감정</b> : {{item.data.feeling}}
+                        <b>{{localize "INSANE.Residence"}}</b> : {{#if item.data.residence}} O {{else}} X {{/if}} | 
+                        <b>{{localize "INSANE.Secret"}}</b> : {{#if item.data.secret}} O {{else}} X {{/if}} | 
+                        <b>{{localize "INSANE.Feeling"}}</b> : {{item.data.feeling}}
                         <span class="item-details-toggle">
                             <i class="fas fa-chevron-down"></i>
                         </span>
@@ -240,7 +255,7 @@
         <div class="tab items" data-group="primary" data-tab="items">
           <div class="cell cell--common-talent">
             <h2 class="cell--title">
-              <label>아이템 리스트</label>
+              <label>{{localize "INSANE.ItemsList"}}</label>
               <div class="item-controls">
                 <button class="item-control item-create" data-type="item" >
                   <i class="fas fa-plus"></i>
@@ -267,7 +282,7 @@
                 </div>
                 <div class="item-description">
                   <p>{{{item.data.description}}}</p>
-                  <button class="use-item">아이템 사용</button>
+                  <button class="use-item">{{localize "INSANE.UseItem"}}</button>
                 </div>
               </li>
             {{/each}}

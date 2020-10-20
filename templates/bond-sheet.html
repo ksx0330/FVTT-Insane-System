@@ -3,15 +3,15 @@
         <div class="header-fields">
             <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
             <div class="resource quater-width">
-            	<span class="check-span">거처</span>
+            	<span class="check-span">{{localize "INSANE.Residence"}}</span>
                 <input type="checkbox" name="data.residence" {{#if data.residence}} checked {{/if}} />
             </div>
             <div class="resource quater-width">
-            	<span class="check-span">비밀</span>
+            	<span class="check-span">{{localize "INSANE.Secret"}}</span>
                 <input type="checkbox" name="data.secret" {{#if data.secret}} checked {{/if}} />
             </div>
             <div class="resource double-width">
-            	<span>감정</span>
+            	<span>{{localize "INSANE.Feeling"}}</span>
                 <input type="text" class="string-input" name="data.feeling" value="{{data.feeling}}" data-dtype="String"/>
             </div>
         </div>
