@@ -23,6 +23,8 @@ export class InsaneActorSheet extends ActorSheet {
     const data = super.getData();
     data.dtypes = ["String", "Number", "Boolean"];
 
+    console.log(data);
+	  
     data.data.tables = [];
     for (var i = 2; i <= 12; ++i) {
         data.data.tables.push({line: [], number: i});
