@@ -114,7 +114,7 @@ export class InsaneActorSheet extends ActorSheet {
 
   async _onRollTalent(event) {
     event.preventDefault();
-    num = event.currentTarget.dataset.num;
+    let num = event.currentTarget.dataset.num;
 
     // GM rolls.
     let chatData = {
