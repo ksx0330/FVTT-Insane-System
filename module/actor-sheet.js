@@ -23,15 +23,13 @@ export class InsaneActorSheet extends ActorSheet {
     const data = super.getData();
     data.dtypes = ["String", "Number", "Boolean"];
 
-    console.log(data.data.talent.table);
-	  
     data.data.tables = [];
     for (var i = 2; i <= 12; ++i) {
         data.data.tables.push({line: [], number: i});
         for (var j = 0; j < 6; ++j) {
             var name = String.fromCharCode(65 + j);
-            data.data.tables[i - 2].line.push({ id: `col-${i - 1}-${j}`, title: `INSANE.${name}${i}`, name: `data.talent.table.${j}.${i - 1}.state`, 
-                                                state: data.data.talent.table[j][i - 1].state, num: data.data.talent.table[j][i - 1].num });
+            data.data.tables[i - 2].line.push({ id: `col-${i}-${j}`, title: `INSANE.${name}${i}`, name: `data.talent.table.${j}.${i - 2}.state`, 
+                                                state: data.data.talent.table[j][i - 2].state, num: data.data.talent.table[j][i - 2].num });
         }
     }
 
