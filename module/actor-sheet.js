@@ -114,9 +114,9 @@ export class InsaneActorSheet extends ActorSheet {
   async _updateObject(event, formData) {
     let target = event.currentTarget;
 
-    console.log(event);
-    if (target != undefined && target.name.indexOf("data.talent") == -1)
-      return this.object.update(formData);
+    console.log(this.actor);
+    if (target == undefined || target.name.indexOf("data.talent") == -1)
+      return await this.object.update(formData);
 
     await this.object.update(formData);
 
@@ -180,6 +180,8 @@ export class InsaneActorSheet extends ActorSheet {
    * @private
    */
   _onItemCreate(event) {
+    console.log(event);
+
     event.preventDefault();
     const header = event.currentTarget;
     const type = header.dataset.type;
