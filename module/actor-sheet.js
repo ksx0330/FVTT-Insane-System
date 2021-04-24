@@ -164,7 +164,7 @@ export class InsaneActorSheet extends ActorSheet {
     });
 
     if (game.dice3d) {
-        game.dice3d.showForRoll(roll, chatData.whisper, chatData.blind).then(displayed => ChatMessage.create(chatData));
+        game.dice3d.showForRoll(roll, game.user, true, chatData.whisper, chatData.blind).then(displayed => ChatMessage.create(chatData));;
     } else {
         chatData.sound = CONFIG.sounds.dice;
         ChatMessage.create(chatData);
