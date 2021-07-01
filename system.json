@@ -9,7 +9,15 @@
   "author": "ltaeng",
   "esmodules": ["module/insane.js"],
   "styles": ["styles/insane.css"],
-  "packs": [],
+  "packs": [
+    {
+      "label": "Card Support",
+      "entity": "Macro",
+      "name": "card-support",
+      "path": "packs/card-support.db",
+      "system": "insane"
+    }
+  ],
   "languages": [
     { "lang": "ko", "name": "Korean", "path": "lang/ko.json" },
     { "lang": "ja", "name": "日本語", "path": "lang/ja.json" }
