@@ -247,21 +247,61 @@ export class InsaneActorSheet extends ActorSheet {
 
   _echoItemDescription(event) {
     event.preventDefault();
-    const item = $(event.currentTarget).parents('.item');
-    const description = item.find('.item-description').first();
-    const title = item.find(".item-name").first();
+    const itemDocument = $(event.currentTarget).parents('.item');
+    const itemId = itemDocument[0].dataset.itemId;
+    
+    const item = this.actor.items.get(itemId);
 
+    let title = item.data.name;
+    let description = item.data.data.description;
+
+    if (item.data.type == 'ability') {
+      if (item.data.img != 'icons/svg/mystery-man.svg')
+        title = `<img src="${item.data.img}" width="40" height="40">&nbsp&nbsp${title}` 
+
+      description = `<table style="text-align: center;">
+                      <tr>
+                        <th>${game.i18n.localize("INSANE.Type")}</th>
+                        <th>${game.i18n.localize("INSANE.Talent")}</th>
+                      </tr>
+
+                      <tr>
+                        <td>${item.data.data.type}</td>
+                        <td>${item.data.data.talent}</td>
+                      </tr>
+                    </table>${description}`
+    }
+
+    else if (item.data.type == 'bond') {
+      if (item.data.img != 'icons/svg/mystery-man.svg')
+        title = `<img src="${item.data.img}" width="40" height="40">&nbsp&nbsp${title}` 
+
+      description = `<table style="text-align: center;">
+                      <tr>
+                        <th>${game.i18n.localize("INSANE.Residence")}</th>
+                        <th>${game.i18n.localize("INSANE.Secret")}</th>
+                        <th>${game.i18n.localize("INSANE.Feeling")}</th>
+                      </tr>
+
+                      <tr>
+                        <td>${(item.data.data.residence) ? "O" : "X"}</td>
+                        <td>${(item.data.data.secret) ? "O" : "X"}</td>
+                        <td>${item.data.data.feeling}</td>
+                      </tr>
+                    </table>${description}`
+    }
+    
+    else if (item.data.type == "item") {
+      if (item.data.img != 'icons/svg/mystery-man.svg')
+        title = `<img src="${item.data.img}" width="40" height="40">&nbsp&nbsp${title} X ${item.data.data.quantity}` 
+    }
+    
     // GM rolls.
     let chatData = {
-      user: game.user._id,
+      user: game.user.id,
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-      content: "<h3>" + title.text() + "</h3>" + description[0].innerHTML
+      content: "<h2>" + title + "</h2>" + description
     };
-
-    let rollMode = game.settings.get("core", "rollMode");
-    if (["gmroll", "blindroll"].includes(rollMode)) chatData["whisper"] = ChatMessage.getWhisperRecipients("GM");
-    if (rollMode === "selfroll") chatData["whisper"] = [game.user._id];
-    if (rollMode === "blindroll") chatData["blind"] = true;
 
     ChatMessage.create(chatData);
 

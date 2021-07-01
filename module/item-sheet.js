@@ -43,6 +43,30 @@ export class InsaneItemSheet extends ItemSheet {
     if (!this.options.editable) return;
 
   }
+  
+    /** @override */
+  async getData(options) {
+    let isOwner = false;
+    let isEditable = this.isEditable;
+
+    const data = super.getData(options);
+    let items = {};
+    let effects = {};
+    let actor = null;
+
+    this.options.title = this.document.data.name;
+    isOwner = this.document.isOwner;
+    isEditable = this.isEditable;
+    
+    const itemData = this.item.data.toObject(false);
+    data.data = itemData.data;
+    
+    data.dtypes = ["String", "Number", "Boolean"];
+
+    console.log(data);
+
+    return data;
+  }
 
 
 }

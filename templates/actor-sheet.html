@@ -191,18 +191,19 @@
               <li class="item flexrow" data-item-id="{{item._id}}" draggable="true">
                 
                 <h4 class="item-name">
-                    <span class="echo-item">
-                        <i class="fas fa-book"></i>
+                    <span class="echo-item" style="float:left;">
+                        <img src="{{item.img}}" title="{{item.name}}" width="37" height="37" style="vertical-align : middle;margin-right:10px;">
                     </span> 
-                    <span class="item-label">{{item.name}} |
-                        <b>{{localize "INSANE.Type"}}</b> : {{item.data.type}} |
+                    <span class="item-label">{{item.name}}<br>
+                    <span style="color : gray; font-size : smaller;">
+                        <b>{{localize "INSANE.Type"}}</b> : {{item.data.type}} /
                         <b>{{localize "INSANE.Talent"}}</b> : {{item.data.talent}}
-
-                        <span class="item-details-toggle">
-                            <i class="fas fa-chevron-down"></i>
-                        </span>
-                    </span>
+                        
+                    <span class="item-details-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </span></span>
                 </h4>
+                
+                
                 <div class="item-controls">
                   <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                   <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
@@ -232,18 +233,19 @@
               <li class="item flexrow" data-item-id="{{item._id}}" draggable="true">
                 
                 <h4 class="item-name">
-                    <span class="echo-item">
-                        <i class="fas fa-book"></i>
+                    <span class="echo-item" style="float:left;">
+                        <img src="{{item.img}}" title="{{item.name}}" width="37" height="37" style="vertical-align : middle;margin-right:10px;">
                     </span> 
-                    <span class="item-label">{{item.name}} |
-                        <b>{{localize "INSANE.Residence"}}</b> : {{#if item.data.residence}} O {{else}} X {{/if}} | 
-                        <b>{{localize "INSANE.Secret"}}</b> : {{#if item.data.secret}} O {{else}} X {{/if}} | 
+                    <span class="item-label">{{item.name}}<br>
+                    <span style="color : gray; font-size : smaller;">
+                        <b>{{localize "INSANE.Residence"}}</b> : {{#if item.data.residence}} O {{else}} X {{/if}} /
+                        <b>{{localize "INSANE.Secret"}}</b> : {{#if item.data.secret}} O {{else}} X {{/if}} /
                         <b>{{localize "INSANE.Feeling"}}</b> : {{item.data.feeling}}
-                        <span class="item-details-toggle">
-                            <i class="fas fa-chevron-down"></i>
-                        </span>
-                    </span>
+                        
+                    <span class="item-details-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </span></span>
                 </h4>
+
                 <div class="item-controls">
                   <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                   <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
@@ -273,15 +275,14 @@
               <li class="item flexrow" data-item-id="{{item._id}}" draggable="true">
                 
                 <h4 class="item-name">
-                    <span class="echo-item">
-                        <i class="fas fa-book"></i>
+                    <span class="echo-item" style="float:left;">
+                        <img src="{{item.img}}" title="{{item.name}}" width="25" height="25" style="vertical-align : middle;margin-right:10px;">
                     </span> 
                     <span class="item-label">{{item.name}} X {{item.data.quantity}}
-                        <span class="item-details-toggle">
-                            <i class="fas fa-chevron-down"></i>
-                        </span>
-                    </span>
+                        
+                    <span class="item-details-toggle"><i class="fas fa-chevron-down"></i></span></span>
                 </h4>
+                
                 <div class="item-controls">
                   <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                   <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
