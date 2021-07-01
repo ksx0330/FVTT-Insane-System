@@ -5,7 +5,7 @@
   "version": "0.0.2",
   "minimumCoreVersion": "0.8.6",
   "compatibleCoreVersion": "0.8.7",
-  "templateVersion": 1,
+  "templateVersion": 2,
   "author": "ltaeng",
   "esmodules": ["module/insane.js"],
   "styles": ["styles/insane.css"],
