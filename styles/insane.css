@@ -52,6 +52,9 @@
 .insane .resource input {
   height: 28px;
 }
+.insane .resource input[type=checkbox] {
+  height: 20px;
+}
 .insane .resource span {
   font-weight: bold;
 }
@@ -163,8 +166,13 @@
 }
 
 .insane .talent-table .checked {
-background-color: #e06060;
+    background-color: #e06060;
     color: white;
+    font-weight: bold;
+}
+
+.insane .talent-table .feared .talent-name {
+    color: purple;
     font-weight: bold;
 }
 

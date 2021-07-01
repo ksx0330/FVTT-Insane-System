@@ -19,8 +19,30 @@ export class InsaneActorSheet extends ActorSheet {
   /* -------------------------------------------- */
 
   /** @override */
-  getData() {
-    const data = super.getData();
+  getData(options) {
+    let isOwner = false;
+    let isEditable = this.isEditable;
+    let data = super.getData(options);
+    let items = {};
+    let actorData = {};
+
+    isOwner = this.document.isOwner;
+    isEditable = this.isEditable;
+
+    // The Actor's data
+    actorData = this.actor.data.toObject(false);
+    data.actor = actorData;
+    data.data = actorData.data;
+
+    // Owned Items
+    data.items = actorData.items;
+    for ( let i of data.items ) {
+      const item = this.actor.items.get(i._id);
+      i.labels = item.labels;
+    }
+    data.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
+    
+    
     data.dtypes = ["String", "Number", "Boolean"];
 
     data.data.tables = [];
@@ -28,11 +50,9 @@ export class InsaneActorSheet extends ActorSheet {
         data.data.tables.push({line: [], number: i});
         for (var j = 0; j < 6; ++j) {
             var name = String.fromCharCode(65 + j);
-            data.data.tables[i - 2].line.push({ id: `col-${i}-${j}`, title: `INSANE.${name}${i}`, name: `data.talent.table.${j}.${i - 2}`, state: data.data.talent.table[j][i - 2].state, num: data.data.talent.table[j][i - 2].num });
+            data.data.tables[i - 2].line.push({ id: `col-${j}-${i-2}`, title: `INSANE.${name}${i}`, name: `data.talent.table.${j}.${i - 2}`, state: data.data.talent.table[j][i - 2].state, num: data.data.talent.table[j][i - 2].num, fear: data.data.talent.table[j][i - 2].fear });
         }
     }
-
-    const actorData = data.actor;
 
     actorData.abilityList = [];
     actorData.bondList = [];
@@ -59,7 +79,7 @@ export class InsaneActorSheet extends ActorSheet {
     // Everything below here is only needed if the sheet is editable
     if (!this.options.editable) return;
 
-    html.find(".talent-name").click(this._onRollTalent.bind(this));
+    html.find(".talent-name").on('mousedown', this._onRouteTalent.bind(this));
 
     // Owned Item management
     html.find('.item-create').click(this._onItemCreate.bind(this));
@@ -130,14 +150,35 @@ export class InsaneActorSheet extends ActorSheet {
 
 
   /* -------------------------------------------- */
+  
+  async _onRouteTalent(event) {
+    if (event.button == 2 || event.which == 3)
+      this._setFearTalent(event);
+    else
+      this._onRollTalent(event);
+  }
+  
+  async _setFearTalent(event) {
+    event.preventDefault();
+    let table = duplicate(this.actor.data.data.talent.table);
+    
+    let dataset = event.currentTarget.dataset;
+    let id = dataset.id.split("-");
+    
+    table[id[1]][id[2]].fear = !table[id[1]][id[2]].fear;
+    
+    await this.actor.update({"data.talent.table": table});
+    console.log(this.actor);
+  }
 
   async _onRollTalent(event) {
     event.preventDefault();
     let dataset = event.currentTarget.dataset;
     let num = dataset.num;
     let title = dataset.title;
-
-    if (title == this.actor.data.data.talent.fear)
+    
+    let fear = this.actor.data.data.talent.fear;
+    if (fear && dataset.fear)
       num = String(Number(num) + 2);
 
     // GM rolls.
