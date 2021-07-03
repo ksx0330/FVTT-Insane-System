@@ -11,7 +11,7 @@ export class InsaneActorSheet extends ActorSheet {
       template: "systems/insane/templates/actor-sheet.html",
       width: 800,
       height: 800,
-      tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description"}],
+      tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "skill"}],
       dragDrop: [{dragSelector: ".item-list .item", dropSelector: null}]
     });
   }
@@ -123,7 +123,7 @@ export class InsaneActorSheet extends ActorSheet {
   setPosition(options={}) {
     const position = super.setPosition(options);
     const sheetBody = this.element.find(".sheet-body");
-    const bodyHeight = position.height - 500;
+    const bodyHeight = position.height;
     sheetBody.css("height", bodyHeight);
     return position;
   }
