@@ -79,6 +79,25 @@ export class InsaneActorSheet extends ActorSheet {
     // Everything below here is only needed if the sheet is editable
     if (!this.options.editable) return;
 
+    html.find(".talent-name").parent().on('mouseenter', (event) => {
+      event.preventDefault();
+      
+      let name = $(event.currentTarget);
+      let dialog = $("#talent-description");
+      let nameData = name.find(".talent-name")[0].dataset;
+      let fear = this.actor.data.data.talent.fear;
+      
+      let num = (fear && nameData.fear !== "false") ? Number(nameData.num) + 2 : nameData.num;
+      
+      dialog.text(name.text() + " / " + num);
+      dialog.css({"left": parseInt(name.offset().left)+10, "top": parseInt(name.offset().top)+28});
+      dialog.show();
+      
+    }).on('mouseleave', (event) => {
+      $("#talent-description").hide();
+      
+    });
+    
     html.find(".talent-name").on('mousedown', this._onRouteTalent.bind(this));
 
     // Owned Item management
@@ -134,7 +153,6 @@ export class InsaneActorSheet extends ActorSheet {
   async _updateObject(event, formData) {
     let target = event.currentTarget;
 
-    console.log(this.actor);
     if (target == undefined || target.name.indexOf("data.talent") == -1)
       return await this.object.update(formData);
 
@@ -178,7 +196,7 @@ export class InsaneActorSheet extends ActorSheet {
     let title = dataset.title;
     
     let fear = this.actor.data.data.talent.fear;
-    if (fear && dataset.fear)
+    if (fear && dataset.fear !== "false")
       num = String(Number(num) + 2);
 
     // GM rolls.
@@ -221,8 +239,6 @@ export class InsaneActorSheet extends ActorSheet {
    * @private
    */
   _onItemCreate(event) {
-    console.log(event);
-
     event.preventDefault();
     const header = event.currentTarget;
     const type = header.dataset.type;
