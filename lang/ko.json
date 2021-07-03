@@ -1,5 +1,7 @@
 {
-   "INSANE.Skill": "특기",
+    "INSANE.Success": "성공",
+    "INSANE.Fail": "실패",
+    "INSANE.Skill": "특기",
     "INSANE.HP": "생명력",
     "INSANE.Sanity": "이성치",
     "INSANE.Curiosity": "호기심",
