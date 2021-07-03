@@ -1,4 +1,6 @@
 {
+  "INSANE.Success": "成功",
+  "INSANE.Fail": "失敗",
   "INSANE.Skill": "特技",
   "INSANE.HP": "生命力",
   "INSANE.Sanity": "正気度",
