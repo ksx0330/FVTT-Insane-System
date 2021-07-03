@@ -6,8 +6,8 @@
         <div class="dice-formula">{{formula}} / {{num}}</div>
         {{{tooltip}}}
         <h4 class="dice-total">
-            {{#ifSuccess total num}} <span style="color: #0f6f0f">Success</span> 
-            {{else}}  <span style="color: #862020">Failed</span> {{/ifSuccess}} 
+            {{#ifSuccess total num}} <span style="color: #0f6f0f">{{localize "INSANE.Success"}}</span> 
+            {{else}}  <span style="color: #862020">{{localize "INSANE.Fail"}}</span> {{/ifSuccess}} 
 
             ({{total}})
         </h4>
