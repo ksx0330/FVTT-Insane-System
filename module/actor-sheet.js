@@ -203,7 +203,7 @@ export class InsaneActorSheet extends ActorSheet {
     let chatData = {
         user: game.user._id,
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        flavor: "<h2>" + title + "</h2>"
+        flavor: "<h2><b>" + title + "</b></h2>"
     };
 
     let rollMode = game.settings.get("core", "rollMode");
@@ -273,7 +273,7 @@ export class InsaneActorSheet extends ActorSheet {
 
     if (item.data.type == 'ability') {
       if (item.data.img != 'icons/svg/mystery-man.svg')
-        title = `<img src="${item.data.img}" width="40" height="40">&nbsp&nbsp${title}` 
+        title = `<img src="${item.data.img}" width="40" height="40">&nbsp&nbsp<b>${title}</b>` 
 
       description = `<table style="text-align: center;">
                       <tr>
@@ -290,7 +290,7 @@ export class InsaneActorSheet extends ActorSheet {
 
     else if (item.data.type == 'bond') {
       if (item.data.img != 'icons/svg/mystery-man.svg')
-        title = `<img src="${item.data.img}" width="40" height="40">&nbsp&nbsp${title}` 
+        title = `<img src="${item.data.img}" width="40" height="40">&nbsp&nbsp<b>${title}</b>` 
 
       description = `<table style="text-align: center;">
                       <tr>
@@ -309,7 +309,7 @@ export class InsaneActorSheet extends ActorSheet {
     
     else if (item.data.type == "item") {
       if (item.data.img != 'icons/svg/mystery-man.svg')
-        title = `<img src="${item.data.img}" width="40" height="40">&nbsp&nbsp${title} X ${item.data.data.quantity}` 
+        title = `<img src="${item.data.img}" width="40" height="40">&nbsp&nbsp<b>${title} X ${item.data.data.quantity}</b>` 
     }
     
     // GM rolls.
