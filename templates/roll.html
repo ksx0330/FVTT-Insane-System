@@ -3,13 +3,19 @@
     <div class="dice-flavor">{{flavor}}</div>
     {{/if}}
     <div class="dice-result">
-        <div class="dice-formula">{{formula}} / {{num}}</div>
+        <div class="dice-formula">{{formula}} >= {{num}}</div>
         {{{tooltip}}}
         <h4 class="dice-total">
-            {{#ifSuccess total num}} <span style="color: #0f6f0f">{{localize "INSANE.Success"}}</span> 
-            {{else}}  <span style="color: #862020">{{localize "INSANE.Fail"}}</span> {{/ifSuccess}} 
-
-            ({{total}})
+            {{total}}
+            {{#ifSuccess total num}} 
+               {{#ifEquals total "12"}} <span style="color: #0f6f0f; font-size:0.7em;"> ▶ {{localize "INSANE.Special"}} </span>
+                   {{else}}<span style="color: #0f6f0f; font-size:0.7em;"> ▶ {{localize "INSANE.Success"}}  </span>
+               {{/ifEquals}}
+            {{else}} 
+               {{#ifEquals total "2"}} <span style="color: #862020; font-size:0.7em;"> ▶ {{localize "INSANE.Fumble"}} </span>
+                  {{else}}<span style="color: #862020;font-size:0.7em;"> ▶ {{localize "INSANE.Fail"}} </span>
+               {{/ifEquals}} 
+            {{/ifSuccess}}
         </h4>
     </div>
 </div>
