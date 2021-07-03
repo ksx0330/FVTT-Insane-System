@@ -59,7 +59,9 @@
     {{!-- Talent Tab --}}
     <div class="tab skill" data-group="primary" data-tab="skill">
       <span id="talent-description"></span>
-      <h2><b>{{localize "INSANE.Skill"}}</b></h2>
+      <div class="cell">
+        <h2 class="cell--title">{{localize "INSANE.Skill"}}</h2>
+      </div>
       <div class="talent-table">
       <table>
           <colgroup>
@@ -161,7 +163,9 @@
 
       {{!-- Biography Tab --}}
       <div class="tab biography" data-group="primary" data-tab="description">
-          <h2><b>{{localize "INSANE.Basic"}}</b></h2>
+          <div class="cell">
+            <h2 class="cell--title">{{localize "INSANE.Basic"}}</h2>
+          </div>
           <table>
               <tr>
                   <th>{{localize "INSANE.Age"}}</th>
@@ -181,7 +185,9 @@
               </tr>
           </table>
 
-          <h2><b>{{localize "INSANE.Memo"}}</b></h2>
+          <div class="cell">
+            <h2 class="cell--title">{{localize "INSANE.Memo"}}</h2>
+          </div>
           {{editor content=data.details.biography target="data.details.biography" button=true owner=owner editable=editable}}
       </div>
 
