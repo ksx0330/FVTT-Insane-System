@@ -2,7 +2,7 @@
   "name": "insane",
   "title": "Insane System",
   "description": "insane system",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "minimumCoreVersion": "0.8.6",
   "compatibleCoreVersion": "0.8.7",
   "templateVersion": 2,

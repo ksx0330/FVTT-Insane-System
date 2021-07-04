@@ -102,5 +102,9 @@
   "INSANE.F9": "終末",
   "INSANE.F10": "夢",
   "INSANE.F11": "地底",
-  "INSANE.F12": "宇宙"
+  "INSANE.F12": "宇宙",
+    
+    
+  "SETTINGS.TalentTable": "特技一覧",
+  "SETTINGS.TalentTableDesc": "特技一覧変更"
 }

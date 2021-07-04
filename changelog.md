@@ -12,3 +12,6 @@
   * Fixed a bug where fear was applied to all roll.
   * Add talent tooltips
   * Roll result Enhancement (thanks jbblily)
+
+0.0.5 - Change talent list
+  * Add option of changing talent list

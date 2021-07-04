@@ -8,6 +8,7 @@
 import { InsaneItemSheet } from "./item-sheet.js";
 import { InsaneActorSheet } from "./actor-sheet.js";
 import { SecretJournalSheet } from "./secret-journal.js";
+import { InsaneSettings } from "./settings.js";
 
 /* -------------------------------------------- */
 /*  Foundry VTT Initialization                  */
@@ -23,18 +24,9 @@ Hooks.once("init", async function() {
     Items.registerSheet("insane", InsaneItemSheet, {makeDefault: true});
     
     CONFIG.JournalEntry.sheetClass = SecretJournalSheet;
+    InsaneSettings.init();
 
-    Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
-        return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
-    });
 
-    Handlebars.registerHelper('ifOrEquals', function(arg1, arg2, arg3, arg4, options) {
-        return (arg1 == arg2 || arg3 == arg4) ? options.fn(this) : options.inverse(this);
-    });
-
-    Handlebars.registerHelper('ifSuccess', function(arg1, arg2, options) {
-        return (arg1 >= arg2) ? options.fn(this) : options.inverse(this);
-    });
 });
 
 
