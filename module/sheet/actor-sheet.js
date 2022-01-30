@@ -9,7 +9,7 @@ export class InsaneActorSheet extends ActorSheet {
     return mergeObject(super.defaultOptions, {
       classes: ["insane", "sheet", "actor"],
       template: "systems/insane/templates/actor-sheet.html",
-      width: 800,
+      width: 850,
       height: 800,
       tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "skill"}],
       dragDrop: [{dragSelector: ".item-list .item", dropSelector: null}]
@@ -79,6 +79,7 @@ export class InsaneActorSheet extends ActorSheet {
     // Everything below here is only needed if the sheet is editable
     if (!this.options.editable) return;
 
+    /*
     html.find(".talent-name").parent().on('mouseenter', (event) => {
       event.preventDefault();
       
@@ -97,6 +98,7 @@ export class InsaneActorSheet extends ActorSheet {
       $("#talent-description").hide();
       
     });
+    */
     
     html.find(".talent-name").on('mousedown', this._onRouteTalent.bind(this));
 
@@ -106,15 +108,15 @@ export class InsaneActorSheet extends ActorSheet {
     // Update Inventory Item
     html.find('.item-edit').click(ev => {
       const li = $(ev.currentTarget).parents(".item");
-      const item = this.actor.getOwnedItem(li.data("itemId"));
+      const item = this.actor.items.get(li.data("itemId"));
       item.sheet.render(true);
     });
 
     // Delete Inventory Item
     html.find('.item-delete').click(ev => {
       const li = $(ev.currentTarget).parents(".item");
-      this.actor.deleteOwnedItem(li.data("itemId"));
-      li.slideUp(200, () => this.render(false));
+      let item = this.actor.items.get(li.data("itemId"));
+      item.delete();
     });
 
 
@@ -238,7 +240,7 @@ export class InsaneActorSheet extends ActorSheet {
    * @param {Event} event   The originating click event
    * @private
    */
-  _onItemCreate(event) {
+  async _onItemCreate(event) {
     event.preventDefault();
     const header = event.currentTarget;
     const type = header.dataset.type;
@@ -248,7 +250,7 @@ export class InsaneActorSheet extends ActorSheet {
       name: name,
       type: type
     };
-    return this.actor.createOwnedItem(itemData);
+    await this.actor.createEmbeddedDocuments('Item', [itemData], {});
   }
 
   _showItemDetails(event) {
@@ -326,7 +328,7 @@ export class InsaneActorSheet extends ActorSheet {
   async _useItem(event) {
     event.preventDefault();
     const useButton = $(event.currentTarget);
-    const item = this.actor.getOwnedItem(useButton.parents('.item')[0].dataset.itemId);
+    const item = this.actor.items.get(useButton.parents('.item')[0].dataset.itemId);
 
     if (item.data.data.quantity > 0) {
       await item.update({'data.quantity': item.data.data.quantity - 1});

@@ -15,3 +15,7 @@
 
 0.0.5 - Change talent list
   * Add option of changing talent list
+
+0.0.6 - Minor update
+  * Compatible version 9
+  * Add plot dialog when roll combat initative

@@ -69,12 +69,10 @@
   top: -8px;
 }
 .insane .tabs {
-  height: 40px;
   border-top: 1px solid #AAA;
   border-bottom: 1px solid #AAA;
 }
 .insane .tabs .item {
-  line-height: 40px;
   font-weight: bold;
 }
 .insane .tabs .item.active {
@@ -274,4 +272,66 @@
   -webkit-transition: all ease-in-out 0.25s;
   -o-transition: all ease-in-out 0.25s;
   transition: all ease-in-out 0.25s;
+}
+
+.insane .plot-header {
+  height: 35px;
+  font-weight: bold;
+}
+
+.insane .dice-controls {
+  float: right;
+}
+
+.insane .dice-controls button{
+  width: 30px;
+  height:  30px;
+}
+
+.insane .dice-select {
+   filter: invert(20%) sepia(85%) saturate(415%) hue-rotate(94deg) brightness(70%) contrast(100%);
+   width:45px;
+   height:45px;
+}
+
+.insane .ready {
+    background-color: #3ec33e;
+    color: white;
+}
+
+.insane .await {
+    background-color: #ff4b4b;
+    color: white;
+}
+
+.dice-lists {
+  text-align: center;
+}
+
+.dice-lists * {
+  display: inline-block;
+  font-size: 16px;
+  color: #000;
+  font-weight: bold;
+  text-align: center;
+  border: 3px solid #00395a;
+  margin: 1px;
+  background-color: white;
+  border-radius: 15%;
+}
+
+.dice-lists-md * {
+  width: 45px;
+  height: 45px;
+  line-height: 40px;
+}
+
+.dice-lists-sm * {
+  width: 30px;
+  height: 30px;
+  line-height: 25px;
+}
+
+.dice-lists .random {
+  background-color: #ffe2e2;
 }

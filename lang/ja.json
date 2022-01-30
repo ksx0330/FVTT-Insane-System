@@ -103,7 +103,10 @@
   "INSANE.F10": "夢",
   "INSANE.F11": "地底",
   "INSANE.F12": "宇宙",
-    
+  
+  "INSANE.SelectActor": "プロットを行うアクターを選択してください",
+  "INSANE.ReadyPlot": "プロットの選択が完了しました。",
+  "INSANE.AwaitPlot": "プロット選択状態が解除されました。",
     
   "SETTINGS.TalentTable": "特技一覧",
   "SETTINGS.TalentTableDesc": "特技一覧変更"

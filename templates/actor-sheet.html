@@ -65,20 +65,20 @@
       <div class="talent-table">
       <table>
           <colgroup>
-              <col span="1" style="width: 5%;">
               <col span="1" style="width: 2%;">
-              <col span="1" style="width: 10%;">
               <col span="1" style="width: 2%;">
-              <col span="1" style="width: 10%;">
+              <col span="1" style="width: 13%;">
               <col span="1" style="width: 2%;">
-              <col span="1" style="width: 10%;">
+              <col span="1" style="width: 13%;">
               <col span="1" style="width: 2%;">
-              <col span="1" style="width: 10%;">
+              <col span="1" style="width: 13%;">
               <col span="1" style="width: 2%;">
-              <col span="1" style="width: 10%;">
+              <col span="1" style="width: 13%;">
               <col span="1" style="width: 2%;">
-              <col span="1" style="width: 10%;">
-              <col span="1" style="width: 5%;">
+              <col span="1" style="width: 13%;">
+              <col span="1" style="width: 2%;">
+              <col span="1" style="width: 13%;">
+              <col span="1" style="width: 2%;">
           </colgroup>
 
           <tbody>
@@ -106,7 +106,7 @@
                       <input class="talent-checkbox" type="checkbox" name="{{line.[0].name}}.state" {{#if line.[0].state}} checked {{/if}} >
                       <input type="hidden" name="{{line.[0].name}}.num" value="{{line.[0].num}}">
                       <input type="hidden" name="{{line.[0].name}}.fear" value="{{line.[0].fear}}" data-dtype="Boolean">
-                      <label class="talent-name" data-title="{{localTalent line.[0].title}}" data-num="{{line.[0].num}}" data-id="{{line.[0].id}}" data-fear="{{line.[0].fear}}">{{localTalent line.[0].title}}</label>
+                      <label class="talent-name" data-title="{{localTalent line.[0].title}}" data-num="{{line.[0].num}}" data-id="{{line.[0].id}}" data-fear="{{line.[0].fear}}">{{localTalent line.[0].title}} / {{line.[0].num}}</label>
                   </td>
 
                   <td {{#ifOrEquals ../data.talent.curiosity 1 ../data.talent.curiosity 2}} class="active" {{/ifOrEquals}}></td>
@@ -114,7 +114,7 @@
                       <input class="talent-checkbox" type="checkbox" name="{{line.[1].name}}.state" {{#if line.[1].state}} checked {{/if}} >
                       <input type="hidden" name="{{line.[1].name}}.num" value="{{line.[1].num}}">
                       <input type="hidden" name="{{line.[1].name}}.fear" value="{{line.[1].fear}}" data-dtype="Boolean">
-                      <label class="talent-name" data-title="{{localTalent line.[1].title}}" data-num="{{line.[1].num}}" data-id="{{line.[1].id}}" data-fear="{{line.[1].fear}}">{{localTalent line.[1].title}}</label>
+                      <label class="talent-name" data-title="{{localTalent line.[1].title}}" data-num="{{line.[1].num}}" data-id="{{line.[1].id}}" data-fear="{{line.[1].fear}}">{{localTalent line.[1].title}} / {{line.[1].num}}</label>
                   </td>
 
                   <td {{#ifOrEquals ../data.talent.curiosity 2 ../data.talent.curiosity 3}} class="active" {{/ifOrEquals}}></td>
@@ -123,7 +123,7 @@
                       <input class="talent-checkbox" type="checkbox" name="{{line.[2].name}}.state" {{#if line.[2].state}} checked {{/if}} >
                       <input type="hidden" name="{{line.[2].name}}.num" value="{{line.[2].num}}">
                       <input type="hidden" name="{{line.[2].name}}.fear" value="{{line.[2].fear}}" data-dtype="Boolean">
-                      <label class="talent-name" data-title="{{localTalent line.[2].title}}" data-num="{{line.[2].num}}" data-id="{{line.[2].id}}" data-fear="{{line.[2].fear}}">{{localTalent line.[2].title}}</label>
+                      <label class="talent-name" data-title="{{localTalent line.[2].title}}" data-num="{{line.[2].num}}" data-id="{{line.[2].id}}" data-fear="{{line.[2].fear}}">{{localTalent line.[2].title}} / {{line.[2].num}}</label>
                   </td>
 
                   <td {{#ifOrEquals ../data.talent.curiosity 3 ../data.talent.curiosity 4}} class="active" {{/ifOrEquals}}></td>
@@ -132,7 +132,7 @@
                       <input class="talent-checkbox" type="checkbox" name="{{line.[3].name}}.state" {{#if line.[3].state}} checked {{/if}} >
                       <input type="hidden" name="{{line.[3].name}}.num" value="{{line.[3].num}}">
                       <input type="hidden" name="{{line.[3].name}}.fear" value="{{line.[3].fear}}" data-dtype="Boolean">
-                      <label class="talent-name" data-title="{{localTalent line.[3].title}}" data-num="{{line.[3].num}}" data-id="{{line.[3].id}}" data-fear="{{line.[3].fear}}">{{localTalent line.[3].title}}</label>
+                      <label class="talent-name" data-title="{{localTalent line.[3].title}}" data-num="{{line.[3].num}}" data-id="{{line.[3].id}}" data-fear="{{line.[3].fear}}">{{localTalent line.[3].title}} / {{line.[3].num}}</label>
                   </td>
 
                   <td {{#ifOrEquals ../data.talent.curiosity 4 ../data.talent.curiosity 5}} class="active" {{/ifOrEquals}}></td>
@@ -141,7 +141,7 @@
                       <input class="talent-checkbox" type="checkbox" name="{{line.[4].name}}.state" {{#if line.[4].state}} checked {{/if}} >
                       <input type="hidden" name="{{line.[4].name}}.num" value="{{line.[4].num}}">
                       <input type="hidden" name="{{line.[4].name}}.fear" value="{{line.[4].fear}}" data-dtype="Boolean">
-                      <label class="talent-name" data-title="{{localTalent line.[4].title}}" data-num="{{line.[4].num}}" data-id="{{line.[4].id}}" data-fear="{{line.[4].fear}}">{{localTalent line.[4].title}}</label>
+                      <label class="talent-name" data-title="{{localTalent line.[4].title}}" data-num="{{line.[4].num}}" data-id="{{line.[4].id}}" data-fear="{{line.[4].fear}}">{{localTalent line.[4].title}} / {{line.[4].num}}</label>
                   </td>
 
                   <td {{#ifOrEquals ../data.talent.curiosity 5 ../data.talent.curiosity 6}} class="active" {{/ifOrEquals}}></td>
@@ -150,7 +150,7 @@
                       <input class="talent-checkbox" type="checkbox" name="{{line.[5].name}}.state" {{#if line.[5].state}} checked {{/if}} >
                       <input type="hidden" name="{{line.[5].name}}.num" value="{{line.[5].num}}">
                       <input type="hidden" name="{{line.[5].name}}.fear" value="{{line.[5].fear}}" data-dtype="Boolean">
-                      <label class="talent-name" data-title="{{localTalent line.[5].title}}" data-num="{{line.[5].num}}" data-id="{{line.[5].id}}" data-fear="{{line.[5].fear}}">{{localTalent line.[5].title}}</label>
+                      <label class="talent-name" data-title="{{localTalent line.[5].title}}" data-num="{{line.[5].num}}" data-id="{{line.[5].id}}" data-fear="{{line.[5].fear}}">{{localTalent line.[5].title}} / {{line.[5].num}}</label>
                   </td>
                   <th>{{number}}</th>
               </tr>
