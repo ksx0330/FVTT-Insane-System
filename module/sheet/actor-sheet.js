@@ -8,12 +8,19 @@ export class InsaneActorSheet extends ActorSheet {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       classes: ["insane", "sheet", "actor"],
-      template: "systems/insane/templates/actor-sheet.html",
       width: 850,
-      height: 800,
+      height: 830,
       tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "skill"}],
       dragDrop: [{dragSelector: ".item-list .item", dropSelector: null}]
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  get template() {
+    const path = "systems/insane/templates/actor";
+    return `${path}/${this.actor.data.type}-sheet.html`;
   }
 
   /* -------------------------------------------- */
@@ -28,22 +35,27 @@ export class InsaneActorSheet extends ActorSheet {
 
     isOwner = this.document.isOwner;
     isEditable = this.isEditable;
+    
+    data.lang = game.i18n.lang;
+    data.userId = game.user.id
 
     // The Actor's data
     actorData = this.actor.data.toObject(false);
     data.actor = actorData;
     data.data = actorData.data;
+    data.data.isOwner = isOwner;
 
     // Owned Items
-    data.items = actorData.items;
-    for ( let i of data.items ) {
-      const item = this.actor.items.get(i._id);
-      i.labels = item.labels;
-    }
+    data.items = Array.from(this.actor.items.values());
+    data.items = data.items.map( i => {
+      i.data.id = i.id;
+      return i.data;
+    });
+
     data.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
     
-    
     data.dtypes = ["String", "Number", "Boolean"];
+    data.isGM = game.user.isGM;
 
     data.data.tables = [];
     for (var i = 2; i <= 12; ++i) {
@@ -57,14 +69,17 @@ export class InsaneActorSheet extends ActorSheet {
     actorData.abilityList = [];
     actorData.bondList = [];
     actorData.itemList = [];
+    actorData.handoutList = [];
 
-    for (let i of data.actor.items) {
+    for (let i of data.items) {
         if (i.type === 'ability')
             actorData.abilityList.push(i);
         else if (i.type == 'bond')
             actorData.bondList.push(i);
-        else
+        else if (i.type == 'item')
             actorData.itemList.push(i);
+        else if (i.type == 'handout')
+            actorData.handoutList.push(i);
     }
 
     return data;
@@ -76,34 +91,9 @@ export class InsaneActorSheet extends ActorSheet {
   activateListeners(html) {
     super.activateListeners(html);
 
-    // Everything below here is only needed if the sheet is editable
-    if (!this.options.editable) return;
-
-    /*
-    html.find(".talent-name").parent().on('mouseenter', (event) => {
-      event.preventDefault();
-      
-      let name = $(event.currentTarget);
-      let dialog = $("#talent-description");
-      let nameData = name.find(".talent-name")[0].dataset;
-      let fear = this.actor.data.data.talent.fear;
-      
-      let num = (fear && nameData.fear !== "false") ? Number(nameData.num) + 2 : nameData.num;
-      
-      dialog.text(name.text() + " / " + num);
-      dialog.css({"left": parseInt(name.offset().left)+10, "top": parseInt(name.offset().top)+28});
-      dialog.show();
-      
-    }).on('mouseleave', (event) => {
-      $("#talent-description").hide();
-      
-    });
-    */
-    
-    html.find(".talent-name").on('mousedown', this._onRouteTalent.bind(this));
-
-    // Owned Item management
-    html.find('.item-create').click(this._onItemCreate.bind(this));
+    // Talent
+    html.find('.item-label').click(this._showItemDetails.bind(this));
+    html.find(".echo-item").click(this._echoItemDescription.bind(this));
 
     // Update Inventory Item
     html.find('.item-edit').click(ev => {
@@ -112,6 +102,14 @@ export class InsaneActorSheet extends ActorSheet {
       item.sheet.render(true);
     });
 
+    // Everything below here is only needed if the sheet is editable
+    if (!this.options.editable) return;
+
+    html.find(".talent-name").on('mousedown', this._onRouteTalent.bind(this));
+
+    // Owned Item management
+    html.find('.item-create').click(this._onItemCreate.bind(this));
+
     // Delete Inventory Item
     html.find('.item-delete').click(ev => {
       const li = $(ev.currentTarget).parents(".item");
@@ -119,21 +117,20 @@ export class InsaneActorSheet extends ActorSheet {
       item.delete();
     });
 
-
-    // Talent
-    html.find('.item-label').click(this._showItemDetails.bind(this));
-    html.find(".echo-item").click(this._echoItemDescription.bind(this));
-
     // Use Item
     html.find(".use-item").click(this._useItem.bind(this));
+    html.find('.quantity-change').click(this._changeItemQuantity.bind(this));
 
-    if (this.actor.owner) {
+    html.find(".evasion-roll").click(this._evationDialog.bind(this));
+
+    if (this.actor.isOwner) {
       let handler = ev => this._onDragStart(ev);
       html.find('li.item').each((i, li) => {
         if (li.classList.contains("inventory-header")) return;
         li.setAttribute("draggable", true);
         li.addEventListener("dragstart", handler, false);
       });
+
     }
 
   }
@@ -145,32 +142,12 @@ export class InsaneActorSheet extends ActorSheet {
     const position = super.setPosition(options);
     const sheetBody = this.element.find(".sheet-body");
     const bodyHeight = position.height;
-    sheetBody.css("height", bodyHeight);
+    sheetBody.css("height", bodyHeight - 300);
     return position;
   }
 
   /* -------------------------------------------- */
 
-  /** @override */
-  async _updateObject(event, formData) {
-    let target = event.currentTarget;
-
-    if (target == undefined || target.name.indexOf("data.talent") == -1)
-      return await this.object.update(formData);
-
-    await this.object.update(formData);
-
-    let table = this._getTalentTable();
-    for (var i = 0; i < 6; ++i)
-    for (var j = 0; j < 11; ++j)
-      formData[`data.talent.table.${i}.${j}.num`] = table[i][j].num;
-
-    return await this.object.update(formData);
-  }
-
-
-  /* -------------------------------------------- */
-  
   async _onRouteTalent(event) {
     if (event.button == 2 || event.which == 3)
       this._setFearTalent(event);
@@ -186,55 +163,27 @@ export class InsaneActorSheet extends ActorSheet {
     let id = dataset.id.split("-");
     
     table[id[1]][id[2]].fear = !table[id[1]][id[2]].fear;
-    
     await this.actor.update({"data.talent.table": table});
-    console.log(this.actor);
   }
-
+  
   async _onRollTalent(event) {
     event.preventDefault();
     let dataset = event.currentTarget.dataset;
     let num = dataset.num;
     let title = dataset.title;
+    let add = true;
+    let secret = false;
+  
+    if (!event.ctrlKey && !game.settings.get("insane", "rollAddon"))
+      add = false;
+
+    if (event.altKey)
+      secret = true;
     
-    let fear = this.actor.data.data.talent.fear;
-    if (fear && dataset.fear !== "false")
-      num = String(Number(num) + 2);
-
-    // GM rolls.
-    let chatData = {
-        user: game.user._id,
-        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        flavor: "<h2><b>" + title + "</b></h2>"
-    };
-
-    let rollMode = game.settings.get("core", "rollMode");
-    if (["gmroll", "blindroll"].includes(rollMode)) chatData["whisper"] = ChatMessage.getWhisperRecipients("GM");
-    if (rollMode === "selfroll") chatData["whisper"] = [game.user._id];
-    if (rollMode === "blindroll") chatData["blind"] = true;
-
-    let roll = new Roll("2d6");
-    roll.roll();
-    chatData.content = await renderTemplate("systems/insane/templates/roll.html", {
-        formula: roll.formula,
-        flavor: null,
-        user: game.user._id,
-        tooltip: await roll.getTooltip(),
-        total: Math.round(roll.total * 100) / 100,
-        num: num
-    });
-
-    if (game.dice3d) {
-        game.dice3d.showForRoll(roll, game.user, true, chatData.whisper, chatData.blind).then(displayed => ChatMessage.create(chatData));;
-    } else {
-        chatData.sound = CONFIG.sounds.dice;
-        ChatMessage.create(chatData);
-    }
-
+    await this.actor.rollTalent(title, num, add, secret);
   }
 
-
-    /* -------------------------------------------- */
+  /* -------------------------------------------- */
   /**
    * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset
    * @param {Event} event   The originating click event
@@ -265,64 +214,9 @@ export class InsaneActorSheet extends ActorSheet {
 
   _echoItemDescription(event) {
     event.preventDefault();
-    const itemDocument = $(event.currentTarget).parents('.item');
-    const itemId = itemDocument[0].dataset.itemId;
-    
-    const item = this.actor.items.get(itemId);
+    const li = $(event.currentTarget).parents('.item');
 
-    let title = item.data.name;
-    let description = item.data.data.description;
-
-    if (item.data.type == 'ability') {
-      if (item.data.img != 'icons/svg/mystery-man.svg')
-        title = `<img src="${item.data.img}" width="40" height="40">&nbsp&nbsp<b>${title}</b>` 
-
-      description = `<table style="text-align: center;">
-                      <tr>
-                        <th>${game.i18n.localize("INSANE.Type")}</th>
-                        <th>${game.i18n.localize("INSANE.Talent")}</th>
-                      </tr>
-
-                      <tr>
-                        <td>${item.data.data.type}</td>
-                        <td>${item.data.data.talent}</td>
-                      </tr>
-                    </table>${description}`
-    }
-
-    else if (item.data.type == 'bond') {
-      if (item.data.img != 'icons/svg/mystery-man.svg')
-        title = `<img src="${item.data.img}" width="40" height="40">&nbsp&nbsp<b>${title}</b>` 
-
-      description = `<table style="text-align: center;">
-                      <tr>
-                        <th>${game.i18n.localize("INSANE.Residence")}</th>
-                        <th>${game.i18n.localize("INSANE.Secret")}</th>
-                        <th>${game.i18n.localize("INSANE.Feeling")}</th>
-                      </tr>
-
-                      <tr>
-                        <td>${(item.data.data.residence) ? "O" : "X"}</td>
-                        <td>${(item.data.data.secret) ? "O" : "X"}</td>
-                        <td>${item.data.data.feeling}</td>
-                      </tr>
-                    </table>${description}`
-    }
-    
-    else if (item.data.type == "item") {
-      if (item.data.img != 'icons/svg/mystery-man.svg')
-        title = `<img src="${item.data.img}" width="40" height="40">&nbsp&nbsp<b>${title} X ${item.data.data.quantity}</b>` 
-    }
-    
-    // GM rolls.
-    let chatData = {
-      user: game.user.id,
-      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-      content: "<h2>" + title + "</h2>" + description
-    };
-
-    ChatMessage.create(chatData);
-
+    this.actor._echoItemDescription(li[0].dataset.itemId);
   }
 
   async _useItem(event) {
@@ -337,65 +231,102 @@ export class InsaneActorSheet extends ActorSheet {
       let chatData = {
         user: game.user._id,
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        content: "<h3>" + game.i18n.localize("INSANE.UseItem") + ": " + item.data.name + "</h3>"
+        content: "<h2>" + game.i18n.localize("INSANE.UseItem") + ": " + item.data.name + "</h2>" + item.data.data.description
       };
-  
-      let rollMode = game.settings.get("core", "rollMode");
-      if (["gmroll", "blindroll"].includes(rollMode)) chatData["whisper"] = ChatMessage.getWhisperRecipients("GM");
-      if (rollMode === "selfroll") chatData["whisper"] = [game.user._id];
-      if (rollMode === "blindroll") chatData["blind"] = true;
   
       ChatMessage.create(chatData);
 
     }
-  
   }
 
-  _getTalentTable() {
-    let table = JSON.parse(JSON.stringify(this.actor.data.data.talent.table));
-    let curiosity = this.actor.data.data.talent.curiosity;
-    let nodes = [];
+  async _changeItemQuantity(event) {
+    event.preventDefault();
 
-    for (var i = 0; i < 6; ++i)
-    for (var j = 0; j < 11; ++j) {
-      if (table[i][j].state == true) {
-        nodes.push({x: i, y: j});
-        table[i][j].num = "5";
-      } else
-        table[i][j].num = "12";
+    const chargeButton = $(event.currentTarget);
+    const item = this.actor.items.get(chargeButton.parents('.item')[0].dataset.itemId);
+
+    let add = Number(event.currentTarget.dataset.add);
+    let num = Number(item.data.data.quantity);
+
+    if (num + add < 0)
+      return;
+
+    await item.update({"data.quantity": num + add});
+
+    add = (add > 0) ? "+" + add : add
+
+    let chatData = {
+      user: game.user._id,
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      content: "<h3>" + item.data.name + ": " + add + "</h3>"
+    };
+
+    ChatMessage.create(chatData);
+  }
+
+  async _evationDialog(event) {
+    event.preventDefault();
+
+    if (!this.actor.isToken) {
+      new Dialog({
+          title: "Alert",
+          content: game.i18n.localize("INSANE.NotToken"),
+          buttons: {}
+      }).render(true);
+      return;
     }
+
+    if (!this.actor.token.inCombat) {
+      new Dialog({
+          title: "Alert",
+          content: game.i18n.localize("INSANE.NotCombat"),
+          buttons: {}
+      }).render(true);
+      return;
+    }
+
+    if (this.actor.token.combatant.data.initiative == null) {
+      new Dialog({
+          title: "Alert",
+          content: game.i18n.localize("INSANE.NonInit"),
+          buttons: {}
+      }).render(true);
+      return;
+    }
+
+    Dialog.prompt({
+      title: game.i18n.localize("INSANE.Evasion"),
+      content: `
+        <h2>
+          ${game.i18n.localize("INSANE.Fear")} 
+          <input id='fear' type="checkbox" style="float: right" /> 
+        </h2>
         
+      `,
+      render: () => $("#fear").focus(),
+      callback: async () => {
+        const fear = $("#fear").is(":checked");
 
-    let dx = [0, 0, 1, -1];
-    let dy = [1, -1, 0, 0];
-    let move = [1, 1, 2, 2];
-    for (var i = 0; i < nodes.length; ++i) {
-      let queue = [nodes[i]];
+        let num = this.actor.token.combatant.data.initiative + 4;
+        let secret = false;
 
-      while (queue.length != 0) {
-        let now = queue[0];
-        queue.shift();
+        let title = game.i18n.localize("INSANE.Evasion");
+        let add = true;
+      
+        if (!event.ctrlKey && !game.settings.get("insane", "rollAddon"))
+          add = false;
 
-        for (var d = 0; d < 4; ++d) {
-          var nx = now.x + dx[d];
-          var ny = now.y + dy[d];
-          var m = move[d];
+        if (event.altKey)
+          secret = true;
+        
+        await this.actor.rollTalent(title, num, add, secret, fear);
 
-          if (nx < 0 || nx >= 6 || ny < 0 || ny >= 11)
-            continue;
-
-          if (m == 2 && (nx == curiosity - 1 || now.x == curiosity - 1))
-            m = 1;
-
-          if (Number(table[nx][ny].num) > Number(table[now.x][now.y].num) + m) {
-            table[nx][ny].num = String(Number(table[now.x][now.y].num) + m);
-            queue.push({x: nx, y: ny});
-          }
-        }
       }
-    }
+    });
 
-    return table;
-  }
+
+
+  } 
+
 
 }

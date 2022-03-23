@@ -27,10 +27,18 @@
     "INSANE.BondsList": "감정 리스트",
     "INSANE.Residence": "거처",
     "INSANE.Secret": "비밀",
-    "INSANE.Feeling": "인물",
+    "INSANE.Feeling": "감정",
     "INSANE.ItemsList": "아이템 리스트",
+    "INSANE.Use": "사용",
     "INSANE.UseItem": "아이템 사용",
     "INSANE.Quantity": "개수",
+    "INSANE.Visible": "공개",
+    "INSANE.Hidden": "비공개",
+    "INSANE.Handout": "핸드아웃",
+    "INSANE.Evasion": "회피",
+    "INSANE.FearRoll": "공포 판정",
+    "INSANE.SetPlot": "플롯 세팅",
+
     "INSANE.A1": "1. 폭력",
     "INSANE.A2": "소각",
     "INSANE.A3": "고문",
@@ -104,12 +112,22 @@
     "INSANE.F11": "지저",
     "INSANE.F12": "우주",
     
+    "INSANE.NotToken": "토큰만 사용할 수 있습니다.",
+    "INSANE.NotCombat": "전투에 들어가 있지 않습니다.",
+    "INSANE.NonInit": "행동 순서가 정해지지 않았습니다.",
+    
     "INSANE.SelectActor": "액터를 선택해주세요",
     "INSANE.ReadyPlot": "플롯이 준비되었습니다",
     "INSANE.AwaitPlot": "플롯 준비가 해제되었습니다.",
     
-    
     "SETTINGS.TalentTable": "특기 리스트",
-    "SETTINGS.TalentTableDesc": "특기 리스트 변경"
+    "SETTINGS.TalentTableDesc": "특기 리스트 변경",
+    "SETTINGS.RollAddon": "수정치 추가",
+    "SETTINGS.RollAddonDesc": "롤을 할 때 Ctrl을 누르지 않아도 항상 추가 수정치를 입력할 수 있는 다이얼로그가 나옵니다.",
+
+    "ITEM.TypeBond": "인물",
+    "ITEM.TypeAbility": "어빌리티",
+    "ITEM.TypeItem": "아이템",
+    "ITEM.TypeHandout": "핸드아웃"
 
 }

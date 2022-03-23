@@ -34,7 +34,7 @@
   }
 },
 "Item": {
-    "types": ["bond", "ability", "item"],
+    "types": ["bond", "ability", "item", "handout"],
     "bond": {
         "residence": false,
         "secret": false,
@@ -49,6 +49,12 @@
     "item": {
         "description": "",
         "quantity": 1
+    },
+    "handout": {
+        "visible": {},
+        "sVisible": {},
+        "description": "",
+        "secret": ""
     }
 }
 }

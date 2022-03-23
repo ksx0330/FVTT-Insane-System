@@ -8,7 +8,7 @@ export class ActorListDialog extends Dialog {
         this.actors = actors;
 
         this.data = {
-            title: game.i18n.localize("Shinobigami.SelectActor"),
+            title: game.i18n.localize("INSANE.SelectActor"),
             content: this.getContent(),
             buttons: {
                 "cancel": {
@@ -31,13 +31,13 @@ export class ActorListDialog extends Dialog {
 	static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             template: "templates/hud/dialog.html",
-            classes: ["shinobigami", "dialog"],
+            classes: ["insane", "dialog"],
             width: 400
         });
     }
 
     getContent() {
-        var content = `<p>${game.i18n.localize("Shinobigami.SelectActor")}<br><div>`;
+        var content = `<p>${game.i18n.localize("INSANE.SelectActor")}<br><div>`;
         content += '<select id="actor-select-dialog" multiple style="width: 100%; height: 100%">';
 
         for (let item of this.actors) {

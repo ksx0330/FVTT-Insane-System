@@ -18,7 +18,7 @@ export class InsaneItemSheet extends ItemSheet {
 
   /** @override */
   get template() {
-    const path = "systems/insane/templates";
+    const path = "systems/insane/templates/item";
     return `${path}/${this.item.data.type}-sheet.html`;
   }
 
@@ -54,6 +54,8 @@ export class InsaneItemSheet extends ItemSheet {
     let effects = {};
     let actor = null;
 
+    data.userId = game.user.id
+
     this.options.title = this.document.data.name;
     isOwner = this.document.isOwner;
     isEditable = this.isEditable;
@@ -62,8 +64,16 @@ export class InsaneItemSheet extends ItemSheet {
     data.data = itemData.data;
     
     data.dtypes = ["String", "Number", "Boolean"];
+    data.isGM = game.user.isGM;
 
-    console.log(data);
+    if (this.item.data.type == "handout") {
+      data.users = []
+      for (let i of game.users) {
+        if (i.isGM)
+          continue;
+        data.users.push(i)
+      }
+    }
 
     return data;
   }

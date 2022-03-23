@@ -5,8 +5,7 @@ export class SecretJournalSheet extends JournalSheet {
     _getHeaderButtons() {
         let buttons = super._getHeaderButtons();
 
-        // Show Secret Journal
-        if (this.object.owner || this.object.hasPerm(game.user, "OBSERVER") ) {
+        if (this.object.permission >= 2) {
             buttons.unshift({
                 label: "Secret",
                 class: "show-secret",
@@ -42,12 +41,14 @@ export class SecretJournalSheet extends JournalSheet {
             var user = game.user._id;
             var secretJournal = game.journal.get(id);
 
-            if (secretJournal.owner || secretJournal.hasPerm(game.user, "OBSERVER"))
-                Journal._showEntry(secretJournal.uuid, mode, false);
+            if (secretJournal.permission >= 2)
+                await Journal._showEntry(secretJournal.uuid, mode, false);
             else 
                 throw new Error("You don't have permission");
 
         } catch (error) {
+            console.log(error);
+
             new Dialog({
                 title: "Error!",
                 content: "<p>You can't access this secret</p>",
@@ -93,15 +94,16 @@ class SetDialog extends Dialog {
     }
 
     _getContent() {
+	var d = (this.journal.data.flags["insane"] != undefined && this.journal.data.flags["insane"].secret != undefined) ? this.journal.data.flags["insane"].secret.journal.name : "";
         var content = "<p>Input Journal Name<br>";
-        content += `<p><input type="text" id="setJournal" value="${this.journal.data.flags["insane"].secret.journal.name}"></p>Mode: <select id="mode"><option value="text">Text</option><option value="image">Image</option></select></p>`;
+        content += `<p><input type="text" id="setJournal" value="${d}"></p>Mode: <select id="mode"><option value="text">Text</option><option value="image">Image</option></select></p>`;
 
         return content;
     }
 
     async _submit() {
         var set = $("#setJournal").val();
-        var secret = game.data.journal.find((item) => (item.name == set));
+        var secret = game.journal.find((item) => (item.data.name == set)).data;
         var mode = $("#mode").val();
 
         if (secret == undefined) {

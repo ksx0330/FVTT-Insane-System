@@ -16,6 +16,11 @@
 0.0.5 - Change talent list
   * Add option of changing talent list
 
-0.0.6 - Minor update
-  * Compatible version 9
-  * Add plot dialog when roll combat initative
+0.1.0 - Add some feature
+  * Overall UI update
+  * Update to reopen the dice plot
+  * Add Handout Item
+  * Add evasion button
+  * Update on how to use fear
+  * Add skill roll in chat window
+  * Add Ctrl / Alt shotcut

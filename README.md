@@ -11,6 +11,12 @@ dialog on the Setup menu of the application.
 https://raw.githubusercontent.com/ksx0330/FVTT-Insane-System/main/system.json
 
 
+Roll
+-------------
+By pressing Ctrl and clicking on the talents, you can add additional values when rolling the dice.
+By pressing Alt and clicking on the talents, you can roll for gm when rolling the dice.
+
+
 Recommanded Modules
 -------------------
 1. Card supports

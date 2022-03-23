@@ -29,8 +29,16 @@
   "INSANE.Secret": "秘密",
   "INSANE.Feeling": "感情",
   "INSANE.ItemsList": "アイテム一覧",
+  "INSANE.Use": "使用",
   "INSANE.UseItem": "アイテム使用",
   "INSANE.Quantity": "個数",
+  "INSANE.Visible": "公開",
+  "INSANE.Hidden": "非公開",
+  "INSANE.Handout": "ハンドアウト",
+  "INSANE.Evasion": "回避",
+  "INSANE.FearRoll": "恐怖判定",
+  "INSANE.SetPlot": "プロット設定",
+
   "INSANE.A1": "1. 暴力",
   "INSANE.A2": "焼却",
   "INSANE.A3": "拷問",
@@ -103,11 +111,23 @@
   "INSANE.F10": "夢",
   "INSANE.F11": "地底",
   "INSANE.F12": "宇宙",
-  
+
+  "INSANE.NotToken": "トークンのみ使用できます。",
+  "INSANE.NotCombat": "戦闘に入っておりません。",
+  "INSANE.NonInit": "行動手順が決まっていません。",
+
   "INSANE.SelectActor": "プロットを行うアクターを選択してください",
   "INSANE.ReadyPlot": "プロットの選択が完了しました。",
   "INSANE.AwaitPlot": "プロット選択状態が解除されました。",
-    
+  
   "SETTINGS.TalentTable": "特技一覧",
-  "SETTINGS.TalentTableDesc": "特技一覧変更"
+  "SETTINGS.TalentTableDesc": "特技一覧変更",
+  "SETTINGS.RollAddon": "デフォルトで修正値を入力する",
+  "SETTINGS.RollAddonDesc": "ロールをする際、Ctrlキーを押さずに常に修正値を入力できるダイアログを生成する。",
+    
+  "ITEM.TypeBond": "人物",
+  "ITEM.TypeAbility": "アビリティ",
+  "ITEM.TypeItem": "アイテム",
+  "ITEM.TypeHandout": "ハンドアウト"
+
 }

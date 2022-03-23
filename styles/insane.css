@@ -1,201 +1,128 @@
+
+
 .insane {
   /* Sheet Tabs */
   /* Items List */
   /* Attributes */
 }
-.insane .window-content {
-  height: 100%;
-  padding: 5px;
-  overflow-y: hidden;
-}
-.insane .sheet-header {
-  height: 100px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  margin-bottom: 10px;
-}
-.insane .sheet-header .profile-img {
-  flex: 0 0 100px;
-  height: 100px;
-  margin-right: 10px;
-}
-.insane .sheet-header .header-fields {
-  flex: 1;
-  height: 100px;
-}
-.insane .sheet-header h1.charname {
-  height: 50px;
-  padding: 0px;
-  margin: 5px 0;
-  border-bottom: 0;
-}
-.insane .sheet-header h1.charname input {
-  width: 92%;
-  height: 100%;
-  margin: 0;
-}
-.insane .quater-width {
-  width: 25%;
-}
-.insane .double-width {
-  width: 50%;
-}
-.insane .resource {
-  height: 40px;
+
+.insane .margin-top-10 {
   margin-top: 10px;
-  float: left;
+}
+
+.insane .margin-left-10 {
+  margin-left: 10px;
+}
+
+.insane .logo-box {
+  width: 100%;
   text-align: center;
+  background: #444444;
 }
-.insane .resource input {
-  height: 28px;
+
+.insane .logo-box img {
+  border: none;
 }
-.insane .resource input[type=checkbox] {
-  height: 20px;
+
+.insane .sheet-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  height: 100%;
 }
-.insane .resource span {
-  font-weight: bold;
+
+.insane .sheet-wrapper .sheet-header {
+  width: 101%;
+  -webkit-box-ordinal-group: 1;
+  -ms-flex-order: 0;
+  order: 0;
+  margin-bottom: 10px;
+  height: 60px;
 }
-.insane .resource .number-input {
-  width: 50px;
+
+.insane .sheet-header {
+  background: #2d2d2d;
+  color: #fff;
 }
-.insane .resource .string-input {
-  width: 100px;
+
+.insane .sheet-header input {
+  color: #fff;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  border: 0;
 }
-.insane .resource .check-span {
+
+.insane .sheet-header input {
+  color: #fff;
+  border-bottom: 2px solid #fff;
+  margin: 0 10px;
+  font-size: 18px;
+  height: 32px;
+  line-height: 32px;
+}
+
+.insane .sheet-header .header-box {
+  flex: 0 0 0;
+  margin: 12px;
+}
+
+.insane .sheet-header .header-box button {
+  background: white;
+  border: none;
+}
+
+.insane .sheet-wrapper .sheet-main {
+  -webkit-box-flex: 100%;
+  -ms-flex: 100% 1 1;
+  flex: 100% 1 1;
+  height: calc(100% - 80px);
+}
+
+.insane .sheet-wrapper .sheet-main .sheet-attributes {
+  display: grid;
+  grid-column: span 15;
+  grid-template-columns: repeat(15, minmax(0, 1fr));
+  gap: 0px 10px;
+  margin: 0 0 10px 0;
+  padding: 0;
+}
+
+.insane .sheet-item .sheet-wrapper .sheet-attributes {
+  display: grid;
+  grid-column: span 16;
+  grid-template-columns: repeat(16, minmax(0, 1fr));
+  gap: 0px 10px;
+  margin: 0 0 10px 0;
+  padding: 0;
+}
+
+.insane .sheet-wrapper .sheet-attributes .cell {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
   position: relative;
-  top: -8px;
-}
-.insane .tabs {
-  border-top: 1px solid #AAA;
-  border-bottom: 1px solid #AAA;
-}
-.insane .tabs .item {
-  font-weight: bold;
-}
-.insane .tabs .item.active {
-  text-decoration: underline;
-  text-shadow: none;
-}
-.insane .sheet-body {
-  overflow: auto;
-}
-.insane .sheet-body .tab {
-  height: 100%;
-  overflow-y: auto;
-}
-.insane .editor,
-.insane .editor-content {
-  height: 100%;
-}
-.insane .item-list {
-  list-style: none;
-  margin: 7px 0;
-  padding: 0;
-  overflow-y: auto;
-}
-.insane .item-list .item {
-  height: 30px;
-  line-height: 24px;
-  padding: 3px 0;
-  border-bottom: 1px solid #BBB;
-}
-.insane .item-list .item img {
-  flex: 0 0 24px;
-  margin-right: 5px;
-}
-.insane .item-list .item-name {
-  margin: 0;
-}
-.insane .item-list .item-controls {
-  flex: 0 0 36px;
-}
-.insane .attributes-header {
-  padding: 5px;
-  margin: 5px 0;
-  background: rgba(0, 0, 0, 0.05);
-  border: 1px solid #AAA;
-  border-radius: 2px;
-  text-align: center;
-  font-weight: bold;
-}
-.insane .attributes-header .attribute-label {
-  flex: 1.5;
-}
-.insane .attributes-header .attribute-control {
-  flex: 0 0 20px;
-}
-.insane .attributes-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.insane .attributes-list li > * {
-  margin: 0 3px;
-  height: 28px;
-  line-height: 24px;
-  background: transparent;
-  border: none;
-  border-radius: 0;
-  border-bottom: 1px solid #AAA;
-}
-.insane .attributes-list a.attribute-control {
-  flex: 0 0 20px;
-  text-align: center;
-  line-height: 28px;
-  border: none;
-}
-.insane.sheet.actor {
-  min-width: 560px;
-  min-height: 420px;
-}
-.insane.sheet.item {
-  min-width: 460px;
-  min-height: 400px;
-}
-.insane .talent-table table, th, td {
-  border: 1px solid black;
 }
 
-.insane .talent-table .active {
-  background-color: #454545;
-}
-
-.insane .talent-table .checked {
-    background-color: #e06060;
-    color: white;
-    font-weight: bold;
-}
-
-.insane .talent-table .feared .talent-name {
-    color: purple;
-    font-weight: bold;
-}
-
-.insane .talent-checkbox {
-    width: 15px;
-    height: 15px;
-}
-
-.insane .talent-name {
-    height: 15px;
-}
-
-.insane #talent-description {
-    padding: 2px 8px;
-    border: 2px solid black;
-    background-color: #efefef;
-    text-align: center;
-    font-weight: bold;
-    position: fixed;
-    display: none;
-    z-index: 50;
-    border-radius: 15%;
-}
-
-.insane .cell .cell--title {
+.insane .sheet-wrapper .cell--title {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -220,12 +147,194 @@
   font-weight: bold;
 }
 
+.insane .sheet-wrapper .sheet-attributes .cell .cell--title {
+  -webkit-box-flex: 100%;
+  -ms-flex: 100%;
+  flex: 100%;
+  background: #2d3748;
+  color: #fff;
+  padding: 5px;
+  height: 34px;
+}
+
+.insane .sheet-wrapper .sheet-attributes .cell .cell--title {
+  width: 110px;
+}
+
+.insane .sheet-item .sheet-wrapper .sheet-attributes .cell .cell--title {
+  width: 150px;
+}
+
+.insane .sheet-wrapper .sheet-main .cell--img {
+  grid-column: span 3;
+}
+
+.insane .sheet-wrapper .sheet-main .cell--img img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 0 10px 0;
+}
+
+
+.insane .sheet-wrapper .sheet-main .cell--attr {
+  grid-column: span 4;
+}
+
+.insane .sheet-wrapper .sheet-main .cell--items {
+  grid-column: span 8;
+}
+
+.insane .sheet-item .cell--4 {
+  grid-column: span 4;
+}
+
+.insane .sheet-item .cell--5 {
+  grid-column: span 5;
+}
+
+.insane .sheet-item .cell--6 {
+  grid-column: span 6;
+}
+
+.insane .sheet-item .cell--11 {
+  grid-column: span 11;
+}
+
+.insane .sheet-item .cell--bio {
+  -webkit-box-flex: 100;
+  -ms-flex: 100;
+  flex: 100;
+}
+
+
+.insane .sheet-wrapper .sheet-main .cell .cell--horizon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.insane .sheet-attributes .cell--counter {
+  margin-right: 10px;
+}
+
+.insane .sheet-attributes .cell--select {
+  width: 100%;
+}
+
+.insane .sheet-attributes .cell--select select {
+  background: white;
+  width: 100%;
+  height: 32px;
+}
+
+.insane .sheet-attributes input {
+  margin-top: 1px;
+  text-align: center;
+  background: white;
+  height: 32px;
+}
+
+.insane .sheet-attributes .slash {
+  margin: 0 10px;
+  padding-top: 4px;
+}
+
 .insane .item-controls {
   text-align: right;
   -webkit-box-flex: 0;
   -ms-flex: 0 0 40px;
   flex: 0 0 40px;
 }
+
+.insane .item-controls .white-btn {
+  border: none;
+}
+
+.insane .cell--items .items-list {
+  margin: 0;
+  padding: 0 0 0 4px;
+  width: 100%;
+  overflow: auto;
+  height: 128px;
+}
+
+.insane .cell--items .items-list .item {
+  padding: 2px 0;
+}
+
+.insane .cell--items .items-list .item-name {
+  font-size: 17px;
+}
+
+.insane .item-addon {
+  text-align: right;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.insane .icon-button {
+  width: 30px;
+  height: 30px;
+  margin: 0;
+  line-height: 0;
+}
+
+.insane .use-button {
+  width: auto;
+  height: 30px;
+  margin: 0;
+  line-height: 0;
+  font-weight: bold;
+}
+
+.insane nav.tabs {
+  border-bottom: 1px solid;
+  border-top: 0;
+  line-height: 29px;
+  padding: 0;
+}
+
+.insane .tabs .item {
+  border: 1px solid;
+  background: #404040;
+  color: white;
+  border-radius: 4px 4px 0 0;
+  border-color: black;
+  margin: 0 5px -1px;
+  flex: 1;
+}
+
+.insane .tabs .item.active {
+  background: #fff;
+  color: #000;
+  border-bottom: 0;
+  text-shadow: none;
+  font-weight: bold;
+}
+
+.insane .sheet-body {
+  overflow: auto;
+}
+.insane .sheet-body .tab {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.insane .editor, .insane .editor-content {
+  min-height: 350px;
+  resize: none;
+}
+
 
 .insane .item-form .sheet-header {
   margin-bottom: 10px;
@@ -237,7 +346,7 @@
   flex: 0 0 30px;
 }
 
-.insane .items-list .item {
+.insane .tab .items-list .item {
   padding: 10px 0;
 }
 
@@ -273,6 +382,85 @@
   -o-transition: all ease-in-out 0.25s;
   transition: all ease-in-out 0.25s;
 }
+
+.insane .side-box {
+  text-align: right;
+  font-weight: bold;
+}
+
+
+
+
+.insane .talent-table table, th, td {
+  border: 1px solid black;
+}
+
+.insane .talent-table .active {
+  background-color: #454545;
+}
+
+.insane .talent-table .checked {
+    background-color: #e06060;
+    color: white;
+    font-weight: bold;
+}
+
+.insane .talent-table {
+  font-size: 0.75rem;
+}
+
+.insane .talent-table .talent-header {
+  position: relative;
+}
+
+.insane .talent-table .talent-header .header-checkbox {
+  position: absolute;
+  top: 2px;
+  right: 1px;
+  width: 15px;
+  height: 15px;
+}
+
+.insane .talent-table colgroup .talent-num {
+  width: 2%;
+}
+
+.insane .talent-table colgroup .talent-name {
+  width: 15%;
+}
+
+.insane .talent-table colgroup .talent-gap {
+  width: 1%; 
+}
+
+.insane .talent-table .en {
+  font-size: 0.7rem;
+}
+
+.insane .talent-table .en colgroup .talent-num {
+  width: 2%;
+}
+
+.insane .talent-table .en colgroup .talent-name {
+  width: 13%;
+}
+
+.insane .talent-table .feared .talent-name {
+  color: purple;
+  font-weight: bold;
+}
+
+.insane .talent-checkbox {
+  width: 15px;
+  height: 15px;
+  float: left;
+}
+
+.insane .talent-name {
+  margin: 3px 0;
+}
+
+
 
 .insane .plot-header {
   height: 35px;
@@ -334,4 +522,30 @@
 
 .dice-lists .random {
   background-color: #ffe2e2;
+}
+
+
+.plot-bar {
+  z-index: 70;
+  position: fixed;
+  bottom: 7px;
+  right: 310px;
+  display: flex;
+  flex-direction: row;
+  flex: 0 0 100px;
+  flex-wrap: wrap;
+}
+
+.plot-bar .item {
+  width: 300px;
+  position: relative;
+}
+
+.plot-bar .remove-bar {
+  position: absolute;
+  width: calc(100% - 12px);
+}
+
+.plot-bar .remove-bar .remove-btn {
+  float: right;
 }

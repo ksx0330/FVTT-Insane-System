@@ -11,6 +11,15 @@ export class InsaneSettings {
 			restricted: true
 		});
 		
+		game.settings.register("insane", "rollAddon", {
+			name: "SETTINGS.RollAddon",
+			hint: "SETTINGS.RollAddonDesc",
+			scope: "client",
+			type: Boolean,
+			default: false,
+			config: true
+		});
+		
 		for (var i = 1; i <= 12; i++)
         for (var j = 0; j < 6; ++j) {			
             var name = String.fromCharCode(65 + j);
@@ -27,8 +36,16 @@ export class InsaneSettings {
 			return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
 		});
 
+		Handlebars.registerHelper('ifOR', function(arg1, arg2, options) {
+			return (arg1 || arg2) ? options.fn(this) : options.inverse(this);;
+		});
+
 		Handlebars.registerHelper('ifOrEquals', function(arg1, arg2, arg3, arg4, options) {
 			return (arg1 == arg2 || arg3 == arg4) ? options.fn(this) : options.inverse(this);
+		});
+
+		Handlebars.registerHelper('checkVisible', function(arg1, arg2, options) {
+			return (arg1 instanceof Object && arg2 in arg1 && arg1[arg2]);
 		});
 
 		Handlebars.registerHelper('ifSuccess', function(arg1, arg2, options) {

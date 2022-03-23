@@ -7,15 +7,19 @@
         {{{tooltip}}}
         <h4 class="dice-total">
             {{total}}
-            {{#ifSuccess total num}} 
-               {{#ifEquals total "12"}} <span style="color: #0f6f0f; font-size:0.7em;"> ▶ {{localize "INSANE.Special"}} </span>
-                   {{else}}<span style="color: #0f6f0f; font-size:0.7em;"> ▶ {{localize "INSANE.Success"}}  </span>
-               {{/ifEquals}}
-            {{else}} 
-               {{#ifEquals total "2"}} <span style="color: #862020; font-size:0.7em;"> ▶ {{localize "INSANE.Fumble"}} </span>
-                  {{else}}<span style="color: #862020;font-size:0.7em;"> ▶ {{localize "INSANE.Fail"}} </span>
-               {{/ifEquals}} 
-            {{/ifSuccess}}
+            {{#if special}} 
+                <span style="color: #0f6f0f; font-size:0.7em;"> ▶ {{localize "INSANE.Special"}} </span>
+            {{else}}
+                {{#if fumble}} <span style="color: #862020; font-size:0.7em;"> ▶ {{localize "INSANE.Fumble"}} </span>
+                {{else}}
+                    {{#ifSuccess total num}} 
+                        <span style="color: #0f6f0f; font-size:0.7em;"> ▶ {{localize "INSANE.Success"}}  </span>
+                    {{else}}
+                        <span style="color: #862020;font-size:0.7em;"> ▶ {{localize "INSANE.Fail"}} </span>
+                    {{/ifSuccess}}
+                {{/if}}
+            {{/if}}
+            
         </h4>
     </div>
 </div>
