@@ -184,7 +184,7 @@
                   <tr>
                       <th>{{number}}</th>
                       <td {{#if ../data.talent.gap.[0]}} class="active" {{/if}}></td>
-                      <td class="{{#if line.[0].state}} checked {{/if}} {{#if line.[0].fear}} feared {{/if}}" >
+                      <td class="{{#if line.[0].state}} checked {{/if}} {{#if line.[0].fear}} feared {{/if}} {{#if line.[0].subTitle}} subTitle {{/if}}" >
                           <input class="talent-checkbox" type="checkbox" name="{{line.[0].name}}.state" {{#if line.[0].state}} checked {{/if}} >
                           <input type="hidden" name="{{line.[0].name}}.num" value="{{line.[0].num}}">
                           <input type="hidden" name="{{line.[0].name}}.fear" value="{{line.[0].fear}}" data-dtype="Boolean">
@@ -192,7 +192,7 @@
                       </td>
 
                       <td {{#if ../data.talent.gap.[1]}} class="active" {{/if}}></td>
-                      <td  class="{{#if line.[1].state}} checked {{/if}} {{#if line.[1].fear}} feared {{/if}}" >
+                      <td  class="{{#if line.[1].state}} checked {{/if}} {{#if line.[1].fear}} feared {{/if}} {{#if line.[1].subTitle}} subTitle {{/if}}" >
                           <input class="talent-checkbox" type="checkbox" name="{{line.[1].name}}.state" {{#if line.[1].state}} checked {{/if}} >
                           <input type="hidden" name="{{line.[1].name}}.num" value="{{line.[1].num}}">
                           <input type="hidden" name="{{line.[1].name}}.fear" value="{{line.[1].fear}}" data-dtype="Boolean">
@@ -201,7 +201,7 @@
 
                       <td {{#if ../data.talent.gap.[2]}} class="active" {{/if}}></td>
 
-                      <td class="{{#if line.[2].state}} checked {{/if}} {{#if line.[2].fear}} feared {{/if}}" >
+                      <td class="{{#if line.[2].state}} checked {{/if}} {{#if line.[2].fear}} feared {{/if}} {{#if line.[2].subTitle}} subTitle {{/if}}" >
                           <input class="talent-checkbox" type="checkbox" name="{{line.[2].name}}.state" {{#if line.[2].state}} checked {{/if}} >
                           <input type="hidden" name="{{line.[2].name}}.num" value="{{line.[2].num}}">
                           <input type="hidden" name="{{line.[2].name}}.fear" value="{{line.[2].fear}}" data-dtype="Boolean">
@@ -210,7 +210,7 @@
 
                       <td {{#if ../data.talent.gap.[3]}} class="active" {{/if}}></td>
 
-                      <td class="{{#if line.[3].state}} checked {{/if}} {{#if line.[3].fear}} feared {{/if}}" >
+                      <td class="{{#if line.[3].state}} checked {{/if}} {{#if line.[3].fear}} feared {{/if}} {{#if line.[3].subTitle}} subTitle {{/if}}" >
                           <input class="talent-checkbox" type="checkbox" name="{{line.[3].name}}.state" {{#if line.[3].state}} checked {{/if}} >
                           <input type="hidden" name="{{line.[3].name}}.num" value="{{line.[3].num}}">
                           <input type="hidden" name="{{line.[3].name}}.fear" value="{{line.[3].fear}}" data-dtype="Boolean">
@@ -219,7 +219,7 @@
 
                       <td {{#if ../data.talent.gap.[4]}} class="active" {{/if}}></td>
 
-                      <td class="{{#if line.[4].state}} checked {{/if}} {{#if line.[4].fear}} feared {{/if}}" >
+                      <td class="{{#if line.[4].state}} checked {{/if}} {{#if line.[4].fear}} feared {{/if}} {{#if line.[4].subTitle}} subTitle {{/if}}" >
                           <input class="talent-checkbox" type="checkbox" name="{{line.[4].name}}.state" {{#if line.[4].state}} checked {{/if}} >
                           <input type="hidden" name="{{line.[4].name}}.num" value="{{line.[4].num}}">
                           <input type="hidden" name="{{line.[4].name}}.fear" value="{{line.[4].fear}}" data-dtype="Boolean">
@@ -228,7 +228,7 @@
 
                       <td {{#if ../data.talent.gap.[5]}} class="active" {{/if}}></td>
 
-                      <td class="{{#if line.[5].state}} checked {{/if}} {{#if line.[5].fear}} feared {{/if}}" >
+                      <td class="{{#if line.[5].state}} checked {{/if}} {{#if line.[5].fear}} feared {{/if}} {{#if line.[5].subTitle}} subTitle {{/if}}" >
                           <input class="talent-checkbox" type="checkbox" name="{{line.[5].name}}.state" {{#if line.[5].state}} checked {{/if}} >
                           <input type="hidden" name="{{line.[5].name}}.num" value="{{line.[5].num}}">
                           <input type="hidden" name="{{line.[5].name}}.fear" value="{{line.[5].fear}}" data-dtype="Boolean">
@@ -239,6 +239,10 @@
                   {{/each}}
               </tbody>
           </table>
+
+          <input type="hidden" name="data.talent.subTitle.id" value="{{data.talent.subTitle.id}}">
+          <input type="hidden" name="data.talent.subTitle.title" value="{{data.talent.subTitle.title}}">
+          <input type="hidden" name="data.talent.subTitle.state" value="{{data.talent.subTitle.state}}" data-dtype="Boolean">
 
           </div>
         </div>
@@ -389,8 +393,12 @@
                   <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                   <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
                 </div>
-                <div class="item-description">
+                <div class="item-description" style="box-shadow: 4px 5px 12px; width: 98%; margin-top: 2px;">
                   <p>{{{item.data.description}}}</p>
+                  {{#ifOR ../isGM (checkVisible item.data.sVisible ../userId)}} 
+                  <hr style="margin: 8px 0;">
+                  <p>{{{item.data.secret}}}</p>
+                  {{/ifOR}}
                 </div>
               </li>
             {{/ifOR}}

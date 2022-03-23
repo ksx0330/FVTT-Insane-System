@@ -450,6 +450,11 @@
   font-weight: bold;
 }
 
+.insane .talent-table .subTitle .talent-name {
+  color: blue;
+  font-weight: bold;
+}
+
 .insane .talent-checkbox {
   width: 15px;
   height: 15px;

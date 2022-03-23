@@ -8,22 +8,36 @@ export class InsaneActor extends Actor {
 
   /** @override */
   async _preUpdate(data, options, userId) {
-    if ('talent' in data.data) {
+    if ('data' in data && 'talent' in data.data) {
       let table = JSON.parse(JSON.stringify(this.data.data.talent.table));
       let gap = JSON.parse(JSON.stringify(this.data.data.talent.gap));
 
       if ('table' in data.data.talent) {
-        let i = Object.keys(data.data.talent.table)[0];
-        let j = Object.keys(data.data.talent.table[i])[0];
-        let key = Object.keys(data.data.talent.table[i][j])[0];
+        for (let a = 0; a < Object.keys(data.data.talent.table).length; ++a) {
+          let i = Object.keys(data.data.talent.table)[a];
+          for (let b = 0; b < Object.keys(data.data.talent.table[i]).length; ++b) {
+            let j = Object.keys(data.data.talent.table[i])[b];
+            for (let c = 0; c < Object.keys(data.data.talent.table[i][j]).length; ++c) {
+              let key = Object.keys(data.data.talent.table[i][j])[c];
+              table[i][j][key] = data.data.talent.table[i][j][key];
+            }
+          }
+        }
 
-        table[i][j][key] = data.data.talent.table[i][j][key];
       }
 
       if ('gap' in data.data.talent) {
-        let i = Object.keys(data.data.talent.gap)[0];
+        for (let a = 0; a < Object.keys(data.data.talent.gap).length; ++a) {
+          let i = Object.keys(data.data.talent.gap)[a];
+          gap[i] = data.data.talent.gap[i];
+        }
+      }
 
-        gap[i] = data.data.talent.gap[i];
+      if ('curiosity' in data.data.talent && data.data.talent.curiosity != 0) {
+        gap = data.data.talent.gap = {"0": false, "1": false, "2": false, "3": false, "4": false, "5": false};
+
+        data.data.talent.gap[data.data.talent.curiosity] = gap[data.data.talent.curiosity] = true;
+        data.data.talent.gap[data.data.talent.curiosity - 1] = gap[data.data.talent.curiosity - 1] = true;
       }
 
       data.data.talent.table = this._getTalentTable(table, gap);
@@ -83,7 +97,7 @@ export class InsaneActor extends Actor {
 
   async rollTalent(title, num, add, secret, fear = false) {
     if (!add) {
-      this._onRollDice(title, null, num, secret, fear); 
+      this._onRollDice(title, num, null, secret, fear); 
       return;
     }
     
@@ -94,7 +108,7 @@ export class InsaneActor extends Actor {
           confirm: {
             icon: '<i class="fas fa-check"></i>',
             label: "Confirm",
-            callback: () => this._onRollDice(title, $("#add").val(), num, secret, fear)
+            callback: () => this._onRollDice(title, num, $("#add").val(), secret, fear)
           }
         },
         default: "confirm"
@@ -102,7 +116,7 @@ export class InsaneActor extends Actor {
     
   }
 
-  async _onRollDice(title, add, num, secret, fear = false) {
+  async _onRollDice(title, num, add, secret, fear = false) {
     
     // GM rolls.
     let chatData = {

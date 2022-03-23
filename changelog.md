@@ -24,3 +24,6 @@
   * Update on how to use fear
   * Add skill roll in chat window
   * Add Ctrl / Alt shotcut
+
+0.1.1 - Bug fix
+  * Add Shift shortcut

@@ -57,12 +57,19 @@ export class InsaneActorSheet extends ActorSheet {
     data.dtypes = ["String", "Number", "Boolean"];
     data.isGM = game.user.isGM;
 
+
+    let subTitle = {state: false, id: ""}
+    if ("subTitle" in data.data.talent && data.data.talent.subTitle.state) {
+      subTitle.id = data.data.talent.subTitle.id;
+      subTitle.state = true;
+    }
+
     data.data.tables = [];
     for (var i = 2; i <= 12; ++i) {
         data.data.tables.push({line: [], number: i});
         for (var j = 0; j < 6; ++j) {
             var name = String.fromCharCode(65 + j);
-            data.data.tables[i - 2].line.push({ id: `col-${j}-${i-2}`, title: `INSANE.${name}${i}`, name: `data.talent.table.${j}.${i - 2}`, state: data.data.talent.table[j][i - 2].state, num: data.data.talent.table[j][i - 2].num, fear: data.data.talent.table[j][i - 2].fear });
+            data.data.tables[i - 2].line.push({ id: `col-${j}-${i-2}`, title: `INSANE.${name}${i}`, name: `data.talent.table.${j}.${i - 2}`, state: data.data.talent.table[j][i - 2].state, num: data.data.talent.table[j][i - 2].num, fear: data.data.talent.table[j][i - 2].fear, subTitle: (`col-${j}-${i-2}` == subTitle.id) ? true : false });
         }
     }
 
@@ -81,6 +88,8 @@ export class InsaneActorSheet extends ActorSheet {
         else if (i.type == 'handout')
             actorData.handoutList.push(i);
     }
+
+    console.log(this);
 
     return data;
   }
@@ -179,6 +188,22 @@ export class InsaneActorSheet extends ActorSheet {
 
     if (event.altKey)
       secret = true;
+
+    if (event.shiftKey) {
+      let subTitle = this.actor.data.data.talent.subTitle;
+
+      if (subTitle.state) {
+        this.actor.update({"data.talent.subTitle.id": "", "data.talent.subTitle.title": "", "data.talent.subTitle.state": false});
+        if (dataset.id != subTitle.id)
+          title = subTitle.title + "->" + title;
+        else
+          return;
+
+      } else {
+        this.actor.update({"data.talent.subTitle.id": dataset.id, "data.talent.subTitle.title": title, "data.talent.subTitle.state": true});
+        return;
+      }
+    }
     
     await this.actor.rollTalent(title, num, add, secret);
   }
@@ -195,10 +220,14 @@ export class InsaneActorSheet extends ActorSheet {
     const type = header.dataset.type;
 
     const name = `New ${type.capitalize()}`;
-    const itemData = {
+    let itemData = {
       name: name,
-      type: type
+      type: type,
+      data: {}
     };
+    if (type == "handout")
+      itemData.data.visible = {[game.user.id]: true};
+
     await this.actor.createEmbeddedDocuments('Item', [itemData], {});
   }
 
@@ -294,32 +323,35 @@ export class InsaneActorSheet extends ActorSheet {
       return;
     }
 
+    let add = true;
+    let secret = false;
+    if (!event.ctrlKey && !game.settings.get("insane", "rollAddon"))
+      add = false;
+
+    if (event.altKey)
+      secret = true;
+
     Dialog.prompt({
       title: game.i18n.localize("INSANE.Evasion"),
       content: `
         <h2>
           ${game.i18n.localize("INSANE.Fear")} 
-          <input id='fear' type="checkbox" style="float: right" /> 
+          <input id='fear' type="checkbox" style="float: right" />
         </h2>
-        
+        ${(add) ? `<p><input id='add' type="text" /></p>` : ""}
       `,
       render: () => $("#fear").focus(),
       callback: async () => {
         const fear = $("#fear").is(":checked");
+        if (add && $("#add").val() != "")
+          add = $("#add").val();
+        else
+          add = null
 
         let num = this.actor.token.combatant.data.initiative + 4;
-        let secret = false;
-
         let title = game.i18n.localize("INSANE.Evasion");
-        let add = true;
-      
-        if (!event.ctrlKey && !game.settings.get("insane", "rollAddon"))
-          add = false;
-
-        if (event.altKey)
-          secret = true;
         
-        await this.actor.rollTalent(title, num, add, secret, fear);
+        await this.actor._onRollDice(title, num, add, secret, fear);
 
       }
     });
