@@ -37,7 +37,7 @@
   "INSANE.Handout": " Handout ",
   "INSANE.Evasion": "回避",
   "INSANE.FearRoll": "恐怖判定",
-  "INSANE.SetPlot": "設定速度",
+  "INSANE.SetPlot": "設定 布局值",
 
   "INSANE.A1": "1. 暴力",
   "INSANE.A2": "燒却",
@@ -117,8 +117,8 @@
   "INSANE.NonInit": "尚未確定行動輪。",
 
   "INSANE.SelectActor": "請選擇使用的角色",
-  "INSANE.ReadyPlot": "已經選擇速度。",
-  "INSANE.AwaitPlot": "已經清除所選擇的速度。",
+  "INSANE.ReadyPlot": "已經選擇 布局值。",
+  "INSANE.AwaitPlot": "已經清除所選擇的布局值。",
   
   "SETTINGS.TalentTable": "特技清單",
   "SETTINGS.TalentTableDesc": "變更特技清單",
