@@ -180,8 +180,13 @@ export class InsaneActor extends Actor {
                         <td>${item.data.data.type}</td>
                         <td>${item.data.data.talent}</td>
                       </tr>
-                    </table>${description}
-                    <button type="button" class="roll-talent" data-talent="${item.data.data.talent}">${item.data.data.talent}</button>`
+                    </table>${description}`
+
+      if (item.data.data.talent != "")
+        description += `<button type="button" class="roll-talent" data-talent="${item.data.data.talent}">${item.data.data.talent}</button>`
+
+      if (item.data.data.formula != undefined && item.data.data.formula != "")
+        description += `<button type="button" class="roll-dice" data-actor-id="${this.id}" data-roll="${item.data.data.roll}" data-formula="${item.data.data.formula}" data-insane="${this.data.data.insane.value}">${ (item.data.data.roll != '-') ? game.i18n.localize("INSANE.Damage") : item.data.data.formula }</button>`;
 
     }
 

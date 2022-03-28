@@ -143,6 +143,65 @@ async function chatListeners(html) {
         return;
     });
 
+    html.on('click', '.roll-dice', async ev => {
+        event.preventDefault();
+        const data = ev.currentTarget.dataset;
+        const actor = game.actors.get(data.actorId);
+        const roll = data.roll;
+        const insane = data.insane
+        let formula = data.formula;
+
+
+        let add = true;
+        if (!event.ctrlKey && !game.settings.get("insane", "rollAddon"))
+            add = false;
+
+        let secret = false;
+        if (event.altKey)
+            secret = true;
+
+
+        const _onRollDice = async (add) => {
+            if (add != null)
+                formula += (add < 0) ? `${add}` : `+${add}`;
+            if (roll == "damage")
+                formula += `+${insane}`;
+
+            let title = (roll == "-") ? formula : game.i18n.localize(`INSANE.Damage`);
+
+            let chatData = {
+                user: game.user.id,
+                speaker: ChatMessage.getSpeaker({ actor: actor }),
+                flavor: "<h2><b>" + title + "</b></h2>"
+            }
+
+            let r = new Roll(formula);
+            await r.roll({async:true});
+
+            r.toMessage(chatData, {
+                rollMode: (secret) ? "gmroll" : game.settings.get("core", "rollMode")
+            });
+        }
+
+        if (add) {
+            new Dialog({
+                title: "Please put the additional value",
+                content: `<p><input type='text' id='add'></p><script>$("#add").focus()</script>`,
+                buttons: {
+                  confirm: {
+                    icon: '<i class="fas fa-check"></i>',
+                    label: "Confirm",
+                    callback: () => _onRollDice($("#add").val())
+                  }
+                },
+                default: "confirm"
+            }).render(true);
+        } else
+            _onRollDice(null);
+
+
+    });
+
 
     html.on('click', '.plot-dialog', async ev => {
         event.preventDefault();

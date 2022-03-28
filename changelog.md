@@ -27,3 +27,6 @@
 
 0.1.1 - Bug fix
   * Add Shift shortcut
+
+0.1.2 - Add damage
+  * Add damage option

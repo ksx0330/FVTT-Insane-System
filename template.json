@@ -12,6 +12,9 @@
       "min": 0,
       "max": 6
     },
+    "insane": {
+      "value": 0
+    },
     "talent": {
         "table":[ 
             [{"state": false, "num": 12, "fear": false}, {"state": false, "num": 12, "fear": false}, {"state": false, "num": 12, "fear": false}, {"state": false, "num": 12, "fear": false}, {"state": false, "num": 12, "fear": false}, {"state": false, "num": 12, "fear": false}, {"state": false, "num": 12, "fear": false}, {"state": false, "num": 12, "fear": false}, {"state": false, "num": 12, "fear": false}, {"state": false, "num": 12, "fear": false}, {"state": false, "num": 12, "fear": false}],
@@ -23,7 +26,6 @@
         ],
         "gap": {"0": false, "1": false, "2": false, "3": false, "4": false, "5": false},
         "curiosity": 0,
-        "fear": false,
         "subTitle": {"id": "", "title": "", "state": false}
     },
     "details": {
@@ -46,6 +48,8 @@
     "ability": {
         "type": "",
         "talent": "",
+        "roll": "-",
+        "formula": "",
         "description": ""
     },
     "item": {

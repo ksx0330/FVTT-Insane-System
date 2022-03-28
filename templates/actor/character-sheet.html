@@ -25,7 +25,7 @@
               <label class="cell--title">{{localize "INSANE.HP"}}<i class="fas fa-heart attribute-icon"></i></label>
               <label class="cell--title">{{localize "INSANE.Sanity"}}<i class="fas fa-brain"></i></label>
               <label class="cell--title">{{localize "INSANE.Curiosity"}}<i class="fas fa-address-card"></i></label>
-              <label class="cell--title">{{localize "INSANE.Exp"}}<i class="fas fa-chart-line"></i></label>
+              <label class="cell--title">{{localize "INSANE.InsaneCard"}}<i class="fas fa-biohazard"></i></label>
             </div>
 
             <div class="cell margin-left-10">
@@ -55,8 +55,8 @@
                 </select>
               </div>
 
-              <div class="cell--exp">
-                <input type="text" name="data.details.exp" value="{{data.details.exp}}" data-dtype="Number">
+              <div class="cell--card">
+                <input type="text" name="data.insane.value" value="{{data.insane.value}}" data-dtype="Number">
               </div>
             </div>
           </div>
@@ -263,7 +263,7 @@
                   <th>{{localize "INSANE.Job"}}</th>
                   <td><input type="text" name="data.details.job" value="{{data.details.job}}"></td>
                   <th>{{localize "INSANE.Exp"}}</th>
-                  <td style="text-align: center;">{{data.details.exp}}</td>
+                  <td><input type="text" name="data.details.exp" value="{{data.details.exp}}" data-dtype="Number"></td>
               </tr>
               <tr>
                   <th>{{localize "INSANE.Fear"}}</th>

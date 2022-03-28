@@ -197,6 +197,10 @@
   grid-column: span 6;
 }
 
+.insane .sheet-item .cell--8 {
+  grid-column: span 8;
+}
+
 .insane .sheet-item .cell--11 {
   grid-column: span 11;
 }
@@ -235,6 +239,10 @@
   background: white;
   width: 100%;
   height: 32px;
+}
+
+.insane .sheet-attributes .cell--select label select {
+  width: auto;
 }
 
 .insane .sheet-attributes input {

@@ -13,11 +13,9 @@
       <div class="sheet-item margin-top-10">
         <div class="sheet-wrapper">
           <section class="sheet-attributes">
-            <div class="cell cell--4">
-              <label class="cell--title">{{localize "INSANE.Type"}}</label>
-            </div>
-
             <div class="cell cell--4 cell--select">
+              <label class="cell--title">{{localize "INSANE.Type"}}</label>
+
               <select name="data.type" class="">
                 {{#select data.type}}
                 <option value="{{localize 'INSANE.Attack'}}">{{localize "INSANE.Attack"}}</option>
@@ -29,10 +27,21 @@
 
             <div class="cell cell--4">
               <label class="cell--title">{{localize "INSANE.Talent"}}</label>
+              <input type="text" name="data.talent" value="{{data.talent}}" data-dtype="String"/>
             </div>
 
-            <div class="cell cell--4">
-              <input type="text" name="data.talent" value="{{data.talent}}" data-dtype="String"/>
+            <div class="cell cell--8 cell--select">
+              <label class="cell--title">{{localize "INSANE.Formula"}}
+                <select name="data.roll" class="">
+                  {{#select data.roll}}
+                  <option value="-">-</option>
+                  <option value="damage">{{localize "INSANE.Damage"}}</option>
+                  {{/select}}
+                </select>
+
+              </label>
+              
+              <input type="text" name="data.formula" value="{{data.formula}}" data-dtype="String"/>
             </div>
 
           </section>
