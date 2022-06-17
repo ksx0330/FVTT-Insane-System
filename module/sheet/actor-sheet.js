@@ -296,7 +296,8 @@ export class InsaneActorSheet extends ActorSheet {
   async _evationDialog(event) {
     event.preventDefault();
 
-    if (!this.actor.isToken) {
+    console.log(this.token);
+    if (this.token == null) {
       new Dialog({
           title: "Alert",
           content: game.i18n.localize("INSANE.NotToken"),
@@ -305,7 +306,7 @@ export class InsaneActorSheet extends ActorSheet {
       return;
     }
 
-    if (!this.actor.token.inCombat) {
+    if (!this.token.inCombat) {
       new Dialog({
           title: "Alert",
           content: game.i18n.localize("INSANE.NotCombat"),
@@ -314,7 +315,7 @@ export class InsaneActorSheet extends ActorSheet {
       return;
     }
 
-    if (this.actor.token.combatant.data.initiative == null) {
+    if (this.token.combatant.data.initiative == null) {
       new Dialog({
           title: "Alert",
           content: game.i18n.localize("INSANE.NonInit"),
@@ -348,7 +349,7 @@ export class InsaneActorSheet extends ActorSheet {
         else
           add = null
 
-        let num = this.actor.token.combatant.data.initiative + 4;
+        let num = this.token.combatant.data.initiative + 4;
         let title = game.i18n.localize("INSANE.Evasion");
         
         await this.actor._onRollDice(title, num, add, secret, fear);

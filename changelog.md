@@ -30,3 +30,6 @@
 
 0.1.2 - Add damage
   * Add damage option
+
+0.1.3 - Bug fix
+  * Fixed a bug where evasion roll would not work when the actor was linked
