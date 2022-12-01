@@ -19,7 +19,7 @@ export class InsaneItemSheet extends ItemSheet {
   /** @override */
   get template() {
     const path = "systems/insane/templates/item";
-    return `${path}/${this.item.data.type}-sheet.html`;
+    return `${path}/${this.item.type}-sheet.html`;
   }
 
   /* -------------------------------------------- */
@@ -43,8 +43,8 @@ export class InsaneItemSheet extends ItemSheet {
     if (!this.options.editable) return;
 
   }
-  
-    /** @override */
+
+  /** @override */
   async getData(options) {
     let isOwner = false;
     let isEditable = this.isEditable;
@@ -54,25 +54,30 @@ export class InsaneItemSheet extends ItemSheet {
     let effects = {};
     let actor = null;
 
-    data.userId = game.user.id
+    data.userId = game.user.id;
 
-    this.options.title = this.document.data.name;
+    this.options.title = this.document.name;
     isOwner = this.document.isOwner;
     isEditable = this.isEditable;
     
-    const itemData = this.item.data.toObject(false);
-    data.data = itemData.data;
+    const itemData = this.item.toObject(false);
+    data.system = this.item.system;
     
     data.dtypes = ["String", "Number", "Boolean"];
     data.isGM = game.user.isGM;
 
-    if (this.item.data.type == "handout") {
+    if (this.item.type == "handout") {
       data.users = []
       for (let i of game.users) {
         if (i.isGM)
           continue;
         data.users.push(i)
       }
+    }
+    
+    data.enrichedBiography = await TextEditor.enrichHTML(this.object.system.description, {async: true});
+    if (this.object.type == "handout") {
+      data.enrichedSecret = await TextEditor.enrichHTML(this.object.system.secret, {async: true});
     }
 
     return data;

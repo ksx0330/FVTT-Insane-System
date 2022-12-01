@@ -20,13 +20,13 @@ export class InsaneActorSheet extends ActorSheet {
   /** @override */
   get template() {
     const path = "systems/insane/templates/actor";
-    return `${path}/${this.actor.data.type}-sheet.html`;
+    return `${path}/${this.actor.type}-sheet.html`;
   }
 
   /* -------------------------------------------- */
 
   /** @override */
-  getData(options) {
+  async getData(options) {
     let isOwner = false;
     let isEditable = this.isEditable;
     let data = super.getData(options);
@@ -35,41 +35,38 @@ export class InsaneActorSheet extends ActorSheet {
 
     isOwner = this.document.isOwner;
     isEditable = this.isEditable;
-    
+
     data.lang = game.i18n.lang;
     data.userId = game.user.id
+    data.isGM = game.user.isGM;
 
     // The Actor's data
-    actorData = this.actor.data.toObject(false);
+    actorData = this.actor.toObject(false);
     data.actor = actorData;
-    data.data = actorData.data;
-    data.data.isOwner = isOwner;
+    data.system = this.actor.system;
+    data.system.isOwner = isOwner;
 
-    // Owned Items
     data.items = Array.from(this.actor.items.values());
     data.items = data.items.map( i => {
-      i.data.id = i.id;
-      return i.data;
+      i.system.id = i.id;
+      return i;
     });
 
     data.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
-    
-    data.dtypes = ["String", "Number", "Boolean"];
-    data.isGM = game.user.isGM;
 
 
     let subTitle = {state: false, id: ""}
-    if ("subTitle" in data.data.talent && data.data.talent.subTitle.state) {
-      subTitle.id = data.data.talent.subTitle.id;
+    if ("subTitle" in data.system.talent && data.system.talent.subTitle.state) {
+      subTitle.id = data.system.talent.subTitle.id;
       subTitle.state = true;
     }
 
-    data.data.tables = [];
+    data.system.tables = [];
     for (var i = 2; i <= 12; ++i) {
-        data.data.tables.push({line: [], number: i});
+        data.system.tables.push({line: [], number: i});
         for (var j = 0; j < 6; ++j) {
             var name = String.fromCharCode(65 + j);
-            data.data.tables[i - 2].line.push({ id: `col-${j}-${i-2}`, title: `INSANE.${name}${i}`, name: `data.talent.table.${j}.${i - 2}`, state: data.data.talent.table[j][i - 2].state, num: data.data.talent.table[j][i - 2].num, fear: data.data.talent.table[j][i - 2].fear, subTitle: (`col-${j}-${i-2}` == subTitle.id) ? true : false });
+            data.system.tables[i - 2].line.push({ id: `col-${j}-${i-2}`, title: `INSANE.${name}${i}`, name: `system.talent.table.${j}.${i - 2}`, state: data.system.talent.table[j][i - 2].state, num: data.system.talent.table[j][i - 2].num, fear: data.system.talent.table[j][i - 2].fear, subTitle: (`col-${j}-${i-2}` == subTitle.id) ? true : false });
         }
     }
 
@@ -89,6 +86,7 @@ export class InsaneActorSheet extends ActorSheet {
             actorData.handoutList.push(i);
     }
 
+    data.enrichedBiography = await TextEditor.enrichHTML(data.system.details.biography, {async: true});
     console.log(this);
 
     return data;
@@ -166,13 +164,13 @@ export class InsaneActorSheet extends ActorSheet {
   
   async _setFearTalent(event) {
     event.preventDefault();
-    let table = duplicate(this.actor.data.data.talent.table);
+    let table = duplicate(this.actor.system.talent.table);
     
     let dataset = event.currentTarget.dataset;
     let id = dataset.id.split("-");
     
     table[id[1]][id[2]].fear = !table[id[1]][id[2]].fear;
-    await this.actor.update({"data.talent.table": table});
+    await this.actor.update({"system.talent.table": table});
   }
   
   async _onRollTalent(event) {
@@ -190,17 +188,17 @@ export class InsaneActorSheet extends ActorSheet {
       secret = true;
 
     if (event.shiftKey) {
-      let subTitle = this.actor.data.data.talent.subTitle;
+      let subTitle = this.actor.system.talent.subTitle;
 
       if (subTitle.state) {
-        this.actor.update({"data.talent.subTitle.id": "", "data.talent.subTitle.title": "", "data.talent.subTitle.state": false});
+        this.actor.update({"system.talent.subTitle.id": "", "system.talent.subTitle.title": "", "system.talent.subTitle.state": false});
         if (dataset.id != subTitle.id)
           title = subTitle.title + "->" + title;
         else
           return;
 
       } else {
-        this.actor.update({"data.talent.subTitle.id": dataset.id, "data.talent.subTitle.title": title, "data.talent.subTitle.state": true});
+        this.actor.update({"system.talent.subTitle.id": dataset.id, "system.talent.subTitle.title": title, "system.talent.subTitle.state": true});
         return;
       }
     }
@@ -223,10 +221,10 @@ export class InsaneActorSheet extends ActorSheet {
     let itemData = {
       name: name,
       type: type,
-      data: {}
+      system: {}
     };
     if (type == "handout")
-      itemData.data.visible = {[game.user.id]: true};
+      itemData.system.visible = {[game.user.id]: true};
 
     await this.actor.createEmbeddedDocuments('Item', [itemData], {});
   }
@@ -253,14 +251,14 @@ export class InsaneActorSheet extends ActorSheet {
     const useButton = $(event.currentTarget);
     const item = this.actor.items.get(useButton.parents('.item')[0].dataset.itemId);
 
-    if (item.data.data.quantity > 0) {
-      await item.update({'data.quantity': item.data.data.quantity - 1});
+    if (item.system.quantity > 0) {
+      await item.update({'system.quantity': item.system.quantity - 1});
   
       // GM rolls.
       let chatData = {
         user: game.user._id,
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        content: "<h2>" + game.i18n.localize("INSANE.UseItem") + ": " + item.data.name + "</h2>" + item.data.data.description
+        content: "<h2>" + game.i18n.localize("INSANE.UseItem") + ": " + item.name + "</h2>" + item.system.description
       };
   
       ChatMessage.create(chatData);
@@ -275,19 +273,19 @@ export class InsaneActorSheet extends ActorSheet {
     const item = this.actor.items.get(chargeButton.parents('.item')[0].dataset.itemId);
 
     let add = Number(event.currentTarget.dataset.add);
-    let num = Number(item.data.data.quantity);
+    let num = Number(item.system.quantity);
 
     if (num + add < 0)
       return;
 
-    await item.update({"data.quantity": num + add});
+    await item.update({"system.quantity": num + add});
 
     add = (add > 0) ? "+" + add : add
 
     let chatData = {
       user: game.user._id,
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-      content: "<h3>" + item.data.name + ": " + add + "</h3>"
+      content: "<h3>" + item.name + ": " + add + "</h3>"
     };
 
     ChatMessage.create(chatData);
@@ -315,7 +313,7 @@ export class InsaneActorSheet extends ActorSheet {
       return;
     }
 
-    if (this.token.combatant.data.initiative == null) {
+    if (this.token.combatant.initiative == null) {
       new Dialog({
           title: "Alert",
           content: game.i18n.localize("INSANE.NonInit"),
@@ -349,7 +347,7 @@ export class InsaneActorSheet extends ActorSheet {
         else
           add = null
 
-        let num = this.token.combatant.data.initiative + 4;
+        let num = this.token.combatant.initiative + 4;
         let title = game.i18n.localize("INSANE.Evasion");
         
         await this.actor._onRollDice(title, num, add, secret, fear);

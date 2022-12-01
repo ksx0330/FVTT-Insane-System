@@ -2,13 +2,26 @@
   "name": "insane",
   "title": "Insane System",
   "description": "insane system",
-  "version": "0.1.3",
-  "minimumCoreVersion": "0.8.6",
-  "compatibleCoreVersion": "9",
+  "version": "0.2.0",
+  "compatibility": {
+    "minimum": 10,
+    "verified": "10.288"
+  },
   "templateVersion": 3,
-  "author": "ltaeng",
+  "authors": [
+    {
+      "name": "ltaeng",
+      "email": "ksx0330@gmail.com",
+      "discord": "Ltaeng#2837"
+    }
+  ],
   "esmodules": ["module/init.js"],
   "styles": ["styles/insane.css"],
+  "languages": [
+    { "lang": "ko", "name": "Korean", "path": "lang/ko.json" },
+    { "lang": "ja", "name": "日本語", "path": "lang/ja.json" },
+    { "lang": "zh-tw", "name": "正體中文", "path": "lang/zh-tw.json" }
+  ],
   "packs": [
     {
       "label": "Card Support",
@@ -17,11 +30,6 @@
       "path": "packs/card-support.db",
       "system": "insane"
     }
-  ],
-  "languages": [
-    { "lang": "ko", "name": "Korean", "path": "lang/ko.json" },
-    { "lang": "ja", "name": "日本語", "path": "lang/ja.json" },
-    { "lang": "zh-tw", "name": "正體中文", "path": "lang/zh-tw.json" }
   ],
   "gridDistance": 5,
   "gridUnits": "ft",

@@ -30,20 +30,20 @@
 
             <div class="cell margin-left-10">
               <div class="cell--horizon cell--counter">
-                <input type="text" class="number-input" name="data.health.value" value="{{data.health.value}}" data-dtype="Number"/>
+                <input type="text" class="number-input" name="system.health.value" value="{{system.health.value}}" data-dtype="Number"/>
                 <span class="slash"> / </span>
-                <input type="text" class="number-input" name="data.health.max" value="{{data.health.max}}" data-dtype="Number"/>
+                <input type="text" class="number-input" name="system.health.max" value="{{system.health.max}}" data-dtype="Number"/>
               </div>
 
               <div class="cell--horizon cell--counter">
-                <input type="text" class="number-input" name="data.sanity.value" value="{{data.sanity.value}}" data-dtype="Number"/>
+                <input type="text" class="number-input" name="system.sanity.value" value="{{system.sanity.value}}" data-dtype="Number"/>
                 <span class="slash"> / </span>
-                <input type="text" class="number-input" name="data.sanity.max" value="{{data.sanity.max}}" data-dtype="Number"/>
+                <input type="text" class="number-input" name="system.sanity.max" value="{{system.sanity.max}}" data-dtype="Number"/>
               </div>
 
               <div class="cell--select">
-                <select name="data.talent.curiosity">
-                  {{#select data.talent.curiosity}}
+                <select name="system.talent.curiosity">
+                  {{#select system.talent.curiosity}}
                   <option value="0">-</option>
                   <option value="1">{{localize "INSANE.A1"}}</option>
                   <option value="2">{{localize "INSANE.B1"}}</option>
@@ -56,7 +56,7 @@
               </div>
 
               <div class="cell--card">
-                <input type="text" name="data.insane.value" value="{{data.insane.value}}" data-dtype="Number">
+                <input type="text" name="system.insane.value" value="{{system.insane.value}}" data-dtype="Number">
               </div>
             </div>
           </div>
@@ -88,7 +88,7 @@
 
               <h4 class="item-addon">
                 <button type="button" class="icon-button quantity-change" data-add="-1">-</button>
-                <span>{{item.data.quantity}}</span>
+                <span>{{item.system.quantity}}</span>
                 <button type="button" class="icon-button quantity-change" data-add="1">+</button>
                 <button type="button" class="use-button use-word use-item">{{localize "INSANE.Use"}}</button>
               </h4>
@@ -98,7 +98,7 @@
                 <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
               </div>
               <div class="item-description">
-                <p>{{{item.data.description}}}</p>
+                <p>{{{item.system.description}}}</p>
               </div>
             </li>
           {{/each}}
@@ -148,42 +148,42 @@
               <tbody>
                   <tr>
                       <th></th>
-                      <td class="gap"><input class="talent-checkbox" type="checkbox" name="data.talent.gap.0"  {{#if data.talent.gap.[0]}} checked {{/if}}></td>
+                      <td class="gap"><input class="talent-checkbox" type="checkbox" name="system.talent.gap.0"  {{#if system.talent.gap.[0]}} checked {{/if}}></td>
                       <th class="talent-header">
                         <div class="header-name">{{localTalent "INSANE.A1"}}</div>
                       </th>
 
-                      <td class="gap"><input class="talent-checkbox" type="checkbox" name="data.talent.gap.1"   {{#if data.talent.gap.[1]}} checked {{/if}}></td>
+                      <td class="gap"><input class="talent-checkbox" type="checkbox" name="system.talent.gap.1"   {{#if system.talent.gap.[1]}} checked {{/if}}></td>
                       <th class="talent-header">
                         <div class="header-name">{{localTalent "INSANE.B1"}}</div>
                       </th>
 
-                      <td class="gap"><input class="talent-checkbox" type="checkbox" name="data.talent.gap.2"  {{#if data.talent.gap.[2]}} checked {{/if}}></td>
+                      <td class="gap"><input class="talent-checkbox" type="checkbox" name="system.talent.gap.2"  {{#if system.talent.gap.[2]}} checked {{/if}}></td>
                       <th class="talent-header">
                         <div class="header-name">{{localTalent "INSANE.C1"}}</div>
                       </th>
 
-                      <td class="gap"><input class="talent-checkbox" type="checkbox" name="data.talent.gap.3"  {{#if data.talent.gap.[3]}} checked {{/if}}></td>
+                      <td class="gap"><input class="talent-checkbox" type="checkbox" name="system.talent.gap.3"  {{#if system.talent.gap.[3]}} checked {{/if}}></td>
                       <th class="talent-header">
                         <div class="header-name">{{localTalent "INSANE.D1"}}</div>
                       </th>
 
-                      <td class="gap"><input class="talent-checkbox" type="checkbox" name="data.talent.gap.4" {{#if data.talent.gap.[4]}} checked {{/if}}></td>
+                      <td class="gap"><input class="talent-checkbox" type="checkbox" name="system.talent.gap.4" {{#if system.talent.gap.[4]}} checked {{/if}}></td>
                       <th class="talent-header">
                         <div class="header-name">{{localTalent "INSANE.E1"}}</div>
                       </th>
 
-                      <td class="gap"><input class="talent-checkbox" type="checkbox" name="data.talent.gap.5" {{#if data.talent.gap.[5]}} checked {{/if}}></td>
+                      <td class="gap"><input class="talent-checkbox" type="checkbox" name="system.talent.gap.5" {{#if system.talent.gap.[5]}} checked {{/if}}></td>
                       <th class="talent-header">
                         <div class="header-name">{{localTalent "INSANE.F1"}}</div>
                       </th>
 
                       <th></th>
                   </tr>
-                  {{#each data.tables}}  
+                  {{#each system.tables}}  
                   <tr>
                       <th>{{number}}</th>
-                      <td {{#if ../data.talent.gap.[0]}} class="active" {{/if}}></td>
+                      <td {{#if ../system.talent.gap.[0]}} class="active" {{/if}}></td>
                       <td class="{{#if line.[0].state}} checked {{/if}} {{#if line.[0].fear}} feared {{/if}} {{#if line.[0].subTitle}} subTitle {{/if}}" >
                           <input class="talent-checkbox" type="checkbox" name="{{line.[0].name}}.state" {{#if line.[0].state}} checked {{/if}} >
                           <input type="hidden" name="{{line.[0].name}}.num" value="{{line.[0].num}}">
@@ -191,7 +191,7 @@
                           <div class="talent-name" data-title="{{localTalent line.[0].title}}" data-num="{{line.[0].num}}" data-id="{{line.[0].id}}" data-stop="{{line.[0].fear}}">{{localTalent line.[0].title}} / {{line.[0].num}}</div>
                       </td>
 
-                      <td {{#if ../data.talent.gap.[1]}} class="active" {{/if}}></td>
+                      <td {{#if ../system.talent.gap.[1]}} class="active" {{/if}}></td>
                       <td  class="{{#if line.[1].state}} checked {{/if}} {{#if line.[1].fear}} feared {{/if}} {{#if line.[1].subTitle}} subTitle {{/if}}" >
                           <input class="talent-checkbox" type="checkbox" name="{{line.[1].name}}.state" {{#if line.[1].state}} checked {{/if}} >
                           <input type="hidden" name="{{line.[1].name}}.num" value="{{line.[1].num}}">
@@ -199,7 +199,7 @@
                           <div class="talent-name" data-title="{{localTalent line.[1].title}}" data-num="{{line.[1].num}}" data-id="{{line.[1].id}}" data-stop="{{line.[1].fear}}">{{localTalent line.[1].title}} / {{line.[1].num}}</div>
                       </td>
 
-                      <td {{#if ../data.talent.gap.[2]}} class="active" {{/if}}></td>
+                      <td {{#if ../system.talent.gap.[2]}} class="active" {{/if}}></td>
 
                       <td class="{{#if line.[2].state}} checked {{/if}} {{#if line.[2].fear}} feared {{/if}} {{#if line.[2].subTitle}} subTitle {{/if}}" >
                           <input class="talent-checkbox" type="checkbox" name="{{line.[2].name}}.state" {{#if line.[2].state}} checked {{/if}} >
@@ -208,7 +208,7 @@
                           <div class="talent-name" data-title="{{localTalent line.[2].title}}" data-num="{{line.[2].num}}" data-id="{{line.[2].id}}" data-stop="{{line.[2].fear}}">{{localTalent line.[2].title}} / {{line.[2].num}}</div>
                       </td>
 
-                      <td {{#if ../data.talent.gap.[3]}} class="active" {{/if}}></td>
+                      <td {{#if ../system.talent.gap.[3]}} class="active" {{/if}}></td>
 
                       <td class="{{#if line.[3].state}} checked {{/if}} {{#if line.[3].fear}} feared {{/if}} {{#if line.[3].subTitle}} subTitle {{/if}}" >
                           <input class="talent-checkbox" type="checkbox" name="{{line.[3].name}}.state" {{#if line.[3].state}} checked {{/if}} >
@@ -217,7 +217,7 @@
                           <div class="talent-name" data-title="{{localTalent line.[3].title}}" data-num="{{line.[3].num}}" data-id="{{line.[3].id}}" data-stop="{{line.[3].fear}}">{{localTalent line.[3].title}} / {{line.[3].num}}</div>
                       </td>
 
-                      <td {{#if ../data.talent.gap.[4]}} class="active" {{/if}}></td>
+                      <td {{#if ../system.talent.gap.[4]}} class="active" {{/if}}></td>
 
                       <td class="{{#if line.[4].state}} checked {{/if}} {{#if line.[4].fear}} feared {{/if}} {{#if line.[4].subTitle}} subTitle {{/if}}" >
                           <input class="talent-checkbox" type="checkbox" name="{{line.[4].name}}.state" {{#if line.[4].state}} checked {{/if}} >
@@ -226,7 +226,7 @@
                           <div class="talent-name" data-title="{{localTalent line.[4].title}}" data-num="{{line.[4].num}}" data-id="{{line.[4].id}}" data-stop="{{line.[4].fear}}">{{localTalent line.[4].title}} / {{line.[4].num}}</div>
                       </td>
 
-                      <td {{#if ../data.talent.gap.[5]}} class="active" {{/if}}></td>
+                      <td {{#if ../system.talent.gap.[5]}} class="active" {{/if}}></td>
 
                       <td class="{{#if line.[5].state}} checked {{/if}} {{#if line.[5].fear}} feared {{/if}} {{#if line.[5].subTitle}} subTitle {{/if}}" >
                           <input class="talent-checkbox" type="checkbox" name="{{line.[5].name}}.state" {{#if line.[5].state}} checked {{/if}} >
@@ -240,9 +240,9 @@
               </tbody>
           </table>
 
-          <input type="hidden" name="data.talent.subTitle.id" value="{{data.talent.subTitle.id}}">
-          <input type="hidden" name="data.talent.subTitle.title" value="{{data.talent.subTitle.title}}">
-          <input type="hidden" name="data.talent.subTitle.state" value="{{data.talent.subTitle.state}}" data-dtype="Boolean">
+          <input type="hidden" name="system.talent.subTitle.id" value="{{system.talent.subTitle.id}}">
+          <input type="hidden" name="system.talent.subTitle.title" value="{{system.talent.subTitle.title}}">
+          <input type="hidden" name="system.talent.subTitle.state" value="{{system.talent.subTitle.state}}" data-dtype="Boolean">
 
           </div>
         </div>
@@ -255,19 +255,19 @@
             <table>
                 <tr>
                   <th>{{localize "INSANE.Age"}}</th>
-                  <td><input type="text" name="data.details.age" value="{{data.details.age}}"></td>
+                  <td><input type="text" name="system.details.age" value="{{system.details.age}}"></td>
                   <th>{{localize "INSANE.Gender"}}</th>
-                  <td><input type="text" name="data.details.sex" value="{{data.details.sex}}"></td>
+                  <td><input type="text" name="system.details.sex" value="{{system.details.sex}}"></td>
               </tr>
               <tr>
                   <th>{{localize "INSANE.Job"}}</th>
-                  <td><input type="text" name="data.details.job" value="{{data.details.job}}"></td>
+                  <td><input type="text" name="system.details.job" value="{{system.details.job}}"></td>
                   <th>{{localize "INSANE.Exp"}}</th>
-                  <td><input type="text" name="data.details.exp" value="{{data.details.exp}}" data-dtype="Number"></td>
+                  <td><input type="text" name="system.details.exp" value="{{system.details.exp}}" data-dtype="Number"></td>
               </tr>
               <tr>
                   <th>{{localize "INSANE.Fear"}}</th>
-                  <td colspan="3"><input type="text" name="data.details.fear" value="{{data.details.fear}}"></td>
+                  <td colspan="3"><input type="text" name="system.details.fear" value="{{system.details.fear}}"></td>
               </tr>
 
             </table>
@@ -275,7 +275,7 @@
             <div class="cell">
               <h2 class="cell--title">{{localize "INSANE.Memo"}}</h2>
             </div>
-            {{editor content=data.details.biography target="data.details.biography" button=true owner=owner editable=editable}}
+            {{editor enrichedBiography target="system.details.biography" button=true editable=editable }}
         </div>
 
         {{!-- Owned Ability Tab --}}
@@ -300,8 +300,8 @@
                     </span> 
                     <span class="item-label">{{item.name}}<br>
                     <span style="color : gray; font-size : smaller;">
-                        <b>{{localize "INSANE.Type"}}</b> : {{item.data.type}} /
-                        <b>{{localize "INSANE.Talent"}}</b> : {{item.data.talent}}
+                        <b>{{localize "INSANE.Type"}}</b> : {{item.system.type}} /
+                        <b>{{localize "INSANE.Talent"}}</b> : {{item.system.talent}}
                         
                     <span class="item-details-toggle"><i class="fas fa-chevron-down"></i></span>
                     </span></span>
@@ -313,7 +313,7 @@
                   <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
                 </div>
                 <div class="item-description">
-                  <p>{{{item.data.description}}}</p>
+                  <p>{{{item.system.description}}}</p>
                 </div>
               </li>
 
@@ -343,9 +343,9 @@
                     </span> 
                     <span class="item-label">{{item.name}}<br>
                     <span style="color : gray; font-size : smaller;">
-                        <b>{{localize "INSANE.Residence"}}</b> : {{#if item.data.residence}} O {{else}} X {{/if}} /
-                        <b>{{localize "INSANE.Secret"}}</b> : {{#if item.data.secret}} O {{else}} X {{/if}} /
-                        <b>{{localize "INSANE.Feeling"}}</b> : {{item.data.feeling}}
+                        <b>{{localize "INSANE.Residence"}}</b> : {{#if item.system.residence}} O {{else}} X {{/if}} /
+                        <b>{{localize "INSANE.Secret"}}</b> : {{#if item.system.secret}} O {{else}} X {{/if}} /
+                        <b>{{localize "INSANE.Feeling"}}</b> : {{item.system.feeling}}
                         
                     <span class="item-details-toggle"><i class="fas fa-chevron-down"></i></span>
                     </span></span>
@@ -356,7 +356,7 @@
                   <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
                 </div>
                 <div class="item-description">
-                        <p>{{{item.data.description}}}</p>
+                        <p>{{{item.system.description}}}</p>
                 </div>
               </li>
             {{/each}}
@@ -378,7 +378,7 @@
             <ol class="items-list">
             {{#each actor.handoutList as |item id|}}
 
-            {{#ifOR ../isGM (checkVisible item.data.visible ../userId)}} 
+            {{#ifOR ../isGM (checkVisible item.system.visible ../userId)}} 
               <li class="item flexrow" data-item-id="{{item.id}}" draggable="true">
 
                 <h4 class="item-name">
@@ -394,10 +394,10 @@
                   <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
                 </div>
                 <div class="item-description" style="box-shadow: 4px 5px 12px; width: 98%; margin-top: 2px;">
-                  <p>{{{item.data.description}}}</p>
-                  {{#ifOR ../isGM (checkVisible item.data.sVisible ../userId)}} 
+                  <p>{{{item.system.description}}}</p>
+                  {{#ifOR ../isGM (checkVisible item.system.sVisible ../userId)}} 
                   <hr style="margin: 8px 0;">
-                  <p>{{{item.data.secret}}}</p>
+                  <p>{{{item.system.secret}}}</p>
                   {{/ifOR}}
                 </div>
               </li>

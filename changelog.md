@@ -33,3 +33,6 @@
 
 0.1.3 - Bug fix
   * Fixed a bug where evasion roll would not work when the actor was linked
+
+0.2.0 - Compatibility Update
+  * Update for version v10

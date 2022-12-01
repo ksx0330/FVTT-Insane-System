@@ -127,9 +127,9 @@ async function chatListeners(html) {
             title = (title !== "") ? title : game.i18n.localize(`INSANE.${name}${i}`);
             
             if (title === data.talent) {
-                let num = actor.data.data.talent.table[j][i - 2].num;
+                let num = actor.system.talent.table[j][i - 2].num;
                 if (fear)
-                    fear = actor.data.data.talent.table[j][i - 2].fear;
+                    fear = actor.system.talent.table[j][i - 2].fear;
                 
                 return actor.rollTalent(title, num, add, secret, fear);
             }
