@@ -8,11 +8,12 @@
 import { InsaneItemSheet } from "./sheet/item-sheet.js";
 import { InsaneActorSheet } from "./sheet/actor-sheet.js";
 import { InsaneActor } from "./document/actor.js";
-import { SecretJournalSheet } from "./secret-journal.js";
 import { InsaneSettings } from "./settings.js";
 import { PlotCombat } from "./combat.js";
 import { PlotSettings } from "./plot.js";
 import { PlotDialog } from "./dialog/plot-dialog.js";
+
+import { ActorItemToken } from "./document/token.js";
 
 /* -------------------------------------------- */
 /*  Foundry VTT Initialization                  */
@@ -21,8 +22,8 @@ import { PlotDialog } from "./dialog/plot-dialog.js";
 Hooks.once("init", async function() {
     console.log(`Initializing Simple Insane System`);
 
-
     CONFIG.Actor.documentClass = InsaneActor;
+    CONFIG.Token.objectClass = ActorItemToken;
 
     // Register sheet application classes
     Actors.unregisterSheet("core", ActorSheet);
@@ -32,7 +33,6 @@ Hooks.once("init", async function() {
 
     CONFIG.Combat.documentClass = PlotCombat;
     CONFIG.Combat.initiative.formula = "1d6";
-    CONFIG.JournalEntry.sheetClass = SecretJournalSheet;
     InsaneSettings.init();
     
     PlotSettings.initPlot();
@@ -45,6 +45,22 @@ Hooks.once("ready", async function() {
     hotbar.className = "plot-bar";
 
     basedoc[0].appendChild(hotbar);
+});
+
+Hooks.on("dropCanvasData", async (canvas, data) => {
+    if (data.type == "Item") {
+        let item = await Item.implementation.fromDropData(data);
+        if (item.type != "handout")
+            return;
+
+        const hw = canvas.grid.w / 2;
+        const hh = canvas.grid.h / 2;
+        const pos = canvas.grid.getSnappedPosition(data.x - hw, data.y - hh);
+
+        const token = (await canvas.scene.createEmbeddedDocuments("Token", [{name: item.name, img: item.img, x: pos.x, y: pos.y}], {}))[0];
+        await token.setFlag("insane", "uuid", data.uuid);
+    }
+
 });
 
 Hooks.on("renderChatLog", (app, html, data) => chatListeners(html));

@@ -264,7 +264,8 @@
   flex: 0 0 40px;
 }
 
-.insane .item-controls .white-btn {
+.insane .white-btn {
+  background-color: white;
   border: none;
 }
 

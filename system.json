@@ -2,12 +2,12 @@
   "name": "insane",
   "title": "Insane System",
   "description": "insane system",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "compatibility": {
     "minimum": 10,
     "verified": "10.288"
   },
-  "templateVersion": 3,
+  "templateVersion": 4,
   "authors": [
     {
       "name": "ltaeng",

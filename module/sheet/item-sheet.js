@@ -36,9 +36,25 @@ export class InsaneItemSheet extends ItemSheet {
   /* -------------------------------------------- */
 
   /** @override */
+  _canUserView(user) {
+    if ( this.object.compendium ) return user.isGM || !this.object.compendium.private;
+    let can = this.object.testUserPermission(user, this.options.viewPermission);
+
+    if (this.item.type == "handout" && !can) {
+      const visible = this.item.system.visible;
+      can = visible instanceof Object && game.userId in visible && visible[game.userId];
+    }
+    return can;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
 	activateListeners(html) {
     super.activateListeners(html);
 
+    html.find(".show-actor").click(this._onShowActor.bind(this));
+    
     // Everything below here is only needed if the sheet is editable
     if (!this.options.editable) return;
 
@@ -83,5 +99,12 @@ export class InsaneItemSheet extends ItemSheet {
     return data;
   }
 
+  async _onShowActor(event) {
+    event.preventDefault();
 
+    let actorId = this.object.system.actor;
+    let actor = game.actors.get(actorId);
+  	actor.sheet.render(true);
+  }
+  
 }

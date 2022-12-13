@@ -207,6 +207,31 @@ export class InsaneActorSheet extends ActorSheet {
   }
 
   /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async _onDropActor(event, data) {
+    if ( !this.actor.isOwner ) return false;
+
+    const actor = await Actor.implementation.fromDropData(data);
+    const actorData = actor.toObject();
+
+    const itemData = {
+      name: actor.name,
+      img: actor.img,
+      type: "bond",
+      system: {
+        "actor": actor.id
+      }
+    };
+
+    // Handle item sorting within the same Actor
+    if ( this.actor.uuid === actor.parent?.uuid ) return this._onSortItem(event, itemData);
+
+    // Create the owned item
+    return this._onDropItemCreate(itemData);
+  }
+  
+  /* -------------------------------------------- */
   /**
    * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset
    * @param {Event} event   The originating click event
