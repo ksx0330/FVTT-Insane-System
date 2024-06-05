@@ -128,9 +128,8 @@
     "SETTINGS.RollAddon": "수정치 추가",
     "SETTINGS.RollAddonDesc": "롤을 할 때 Ctrl을 누르지 않아도 항상 추가 수정치를 입력할 수 있는 다이얼로그가 나옵니다.",
 
-    "ITEM.TypeBond": "인물",
-    "ITEM.TypeAbility": "어빌리티",
-    "ITEM.TypeItem": "아이템",
-    "ITEM.TypeHandout": "핸드아웃"
-
+    "TYPES.Item.bond": "인물",
+    "TYPES.Item.ability": "어빌리티",
+    "TYPES.Item.item": "아이템",
+    "TYPES.Item.handout": "핸드아웃"
 }

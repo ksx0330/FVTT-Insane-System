@@ -40,3 +40,6 @@
 0.3.0 - Add drag-related features
   * Add Bond using character sheet drag
   * Place handouts on canvas
+
+0.4.0 - Compatibility Update
+  * Update for version v11

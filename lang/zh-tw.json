@@ -127,10 +127,9 @@
   "SETTINGS.TalentTableDesc": "變更特技清單",
   "SETTINGS.RollAddon": "預設需要輸入修正值",
   "SETTINGS.RollAddonDesc": "擲骰時，首先會生成一個可輪入修正值的對話框，而無需按Ctrl。",
-    
-  "ITEM.TypeBond": "人物",
-  "ITEM.TypeAbility": "能力",
-  "ITEM.TypeItem": "物品",
-  "ITEM.TypeHandout": "Handout"
 
+  "TYPES.Item.bond": "人物",
+  "TYPES.Item.ability": "能力",
+  "TYPES.Item.item": "物品",
+  "TYPES.Item.handout": "Handout"
 }

@@ -128,9 +128,9 @@
   "SETTINGS.RollAddon": "デフォルトで修正値を入力する",
   "SETTINGS.RollAddonDesc": "ロールをする際、Ctrlキーを押さずに常に修正値を入力できるダイアログを生成する。",
     
-  "ITEM.TypeBond": "人物",
-  "ITEM.TypeAbility": "アビリティ",
-  "ITEM.TypeItem": "アイテム",
-  "ITEM.TypeHandout": "ハンドアウト"
+  "TYPES.Item.bond": "人物",
+  "TYPES.Item.ability": "アビリティ",
+  "TYPES.Item.item": "アイテム",
+  "TYPES.Item.handout": "ハンドアウト"
 
 }
