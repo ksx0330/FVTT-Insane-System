@@ -43,3 +43,5 @@
 
 0.4.0 - Compatibility Update
   * Update for version v11
+
+0.4.1 - Bug fix

@@ -1,8 +1,8 @@
 {
-  "name": "insane",
+  "id": "insane",
   "title": "Insane System",
   "description": "insane system",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "compatibility": {
     "minimum": 11,
     "verified": "11.315"
@@ -25,9 +25,9 @@
   "packs": [
     {
       "label": "Card Support",
-      "entity": "Macro",
       "name": "card-support",
       "path": "packs/card-support.db",
+      "type": "Macro",
       "system": "insane"
     }
   ],
