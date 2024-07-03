@@ -2,7 +2,7 @@
   "id": "insane",
   "title": "Insane System",
   "description": "insane system",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "compatibility": {
     "minimum": 11,
     "verified": "11.315"

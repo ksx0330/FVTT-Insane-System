@@ -45,3 +45,5 @@
   * Update for version v11
 
 0.4.1 - Bug fix
+
+0.4.2 - Bug fix
