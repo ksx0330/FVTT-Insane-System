@@ -3,12 +3,32 @@ export class InsaneActor extends Actor {
 
   prepareData() {
     super.prepareData();
+  }
+  
+  prepareDerivedData() {
+    super.prepareDerivedData?.();
+    const sys = this.system ?? {};
+    
+    // In v13, ensure the template always sees the latest data by syncing talent.table to tables.
+    sys.tables = Array.isArray(sys.talent?.table) ? sys.talent.table : (sys.tables ?? []);
+    const tables = Array.isArray(sys.tables) ? sys.tables : [];    
+    
+    
+    let checkedCount = 0;
 
+    for (const row of tables) {
+      const line = row?.line ?? [];
+      for (let i=0; i<line.length; i++) {
+        if (line[i]?.state) checkedCount++;
+      }
+    }
+    sys.derived ??= {};
+    sys.derived.checkedTalents = checkedCount;
   }
 
   /** @override */
   async _preUpdate(data, options, userId) {
-    if ('data' in data && 'talent' in data.system) {
+    if (data?.system?.talent) {
       let table = JSON.parse(JSON.stringify(this.system.talent.table));
       let gap = JSON.parse(JSON.stringify(this.system.talent.gap));
 
@@ -121,7 +141,7 @@ export class InsaneActor extends Actor {
     // GM rolls.
     let chatData = {
         user: game.user.id,
-        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+        speaker: ChatMessage.getSpeaker({ actor: this }),
         flavor: "<h2><b>" + title + "</b></h2>"
     };
 
@@ -135,9 +155,11 @@ export class InsaneActor extends Actor {
       formula += (add < 0) ? `${add}` : `+${add}`;
     if (fear)
       formula += "-2";
-    let roll = new Roll(formula);
-    await roll.roll({async: true});
-    let d = roll.terms[0].total;
+
+    const roll = new Roll(formula);
+    await roll.evaluate({ async: true });
+    // Raw total of 2D6 (for double check). Since the terms structure may change, retrieve from dice as a safeguard.
+    const d = roll.dice?.[0]?.total ?? roll.total;  
     
     chatData.content = await renderTemplate("systems/insane/templates/roll.html", {
         formula: roll.formula,

@@ -148,32 +148,32 @@
               <tbody>
                   <tr>
                       <th></th>
-                      <td class="gap"><input class="talent-checkbox" type="checkbox" name="system.talent.gap.0"  {{#if system.talent.gap.[0]}} checked {{/if}}></td>
+                      <td class="gap"><input class="talent-checkbox" type="checkbox" name="system.talent.gap.0"  {{#if system.talent.gap.[0]}} checked {{/if}} data-dtype="Boolean"></td>
                       <th class="talent-header">
                         <div class="header-name">{{localTalent "INSANE.A1"}}</div>
                       </th>
 
-                      <td class="gap"><input class="talent-checkbox" type="checkbox" name="system.talent.gap.1"   {{#if system.talent.gap.[1]}} checked {{/if}}></td>
+                      <td class="gap"><input class="talent-checkbox" type="checkbox" name="system.talent.gap.1"   {{#if system.talent.gap.[1]}} checked {{/if}} data-dtype="Boolean"></td>
                       <th class="talent-header">
                         <div class="header-name">{{localTalent "INSANE.B1"}}</div>
                       </th>
 
-                      <td class="gap"><input class="talent-checkbox" type="checkbox" name="system.talent.gap.2"  {{#if system.talent.gap.[2]}} checked {{/if}}></td>
+                      <td class="gap"><input class="talent-checkbox" type="checkbox" name="system.talent.gap.2"  {{#if system.talent.gap.[2]}} checked {{/if}} data-dtype="Boolean"></td>
                       <th class="talent-header">
                         <div class="header-name">{{localTalent "INSANE.C1"}}</div>
                       </th>
 
-                      <td class="gap"><input class="talent-checkbox" type="checkbox" name="system.talent.gap.3"  {{#if system.talent.gap.[3]}} checked {{/if}}></td>
+                      <td class="gap"><input class="talent-checkbox" type="checkbox" name="system.talent.gap.3"  {{#if system.talent.gap.[3]}} checked {{/if}} data-dtype="Boolean"></td>
                       <th class="talent-header">
                         <div class="header-name">{{localTalent "INSANE.D1"}}</div>
                       </th>
 
-                      <td class="gap"><input class="talent-checkbox" type="checkbox" name="system.talent.gap.4" {{#if system.talent.gap.[4]}} checked {{/if}}></td>
+                      <td class="gap"><input class="talent-checkbox" type="checkbox" name="system.talent.gap.4" {{#if system.talent.gap.[4]}} checked {{/if}} data-dtype="Boolean"></td>
                       <th class="talent-header">
                         <div class="header-name">{{localTalent "INSANE.E1"}}</div>
                       </th>
 
-                      <td class="gap"><input class="talent-checkbox" type="checkbox" name="system.talent.gap.5" {{#if system.talent.gap.[5]}} checked {{/if}}></td>
+                      <td class="gap"><input class="talent-checkbox" type="checkbox" name="system.talent.gap.5" {{#if system.talent.gap.[5]}} checked {{/if}} data-dtype="Boolean"></td>
                       <th class="talent-header">
                         <div class="header-name">{{localTalent "INSANE.F1"}}</div>
                       </th>
@@ -185,7 +185,7 @@
                       <th>{{number}}</th>
                       <td {{#if ../system.talent.gap.[0]}} class="active" {{/if}}></td>
                       <td class="{{#if line.[0].state}} checked {{/if}} {{#if line.[0].fear}} feared {{/if}} {{#if line.[0].subTitle}} subTitle {{/if}}" >
-                          <input class="talent-checkbox" type="checkbox" name="{{line.[0].name}}.state" {{#if line.[0].state}} checked {{/if}} >
+                          <input class="talent-checkbox" type="checkbox" name="{{line.[0].name}}.state" {{#if line.[0].state}} checked {{/if}} data-dtype="Boolean">
                           <input type="hidden" name="{{line.[0].name}}.num" value="{{line.[0].num}}">
                           <input type="hidden" name="{{line.[0].name}}.fear" value="{{line.[0].fear}}" data-dtype="Boolean">
                           <div class="talent-name" data-title="{{localTalent line.[0].title}}" data-num="{{line.[0].num}}" data-id="{{line.[0].id}}" data-stop="{{line.[0].fear}}">{{localTalent line.[0].title}} / {{line.[0].num}}</div>
@@ -193,7 +193,7 @@
 
                       <td {{#if ../system.talent.gap.[1]}} class="active" {{/if}}></td>
                       <td  class="{{#if line.[1].state}} checked {{/if}} {{#if line.[1].fear}} feared {{/if}} {{#if line.[1].subTitle}} subTitle {{/if}}" >
-                          <input class="talent-checkbox" type="checkbox" name="{{line.[1].name}}.state" {{#if line.[1].state}} checked {{/if}} >
+                          <input class="talent-checkbox" type="checkbox" name="{{line.[1].name}}.state" {{#if line.[1].state}} checked {{/if}} data-dtype="Boolean">
                           <input type="hidden" name="{{line.[1].name}}.num" value="{{line.[1].num}}">
                           <input type="hidden" name="{{line.[1].name}}.fear" value="{{line.[1].fear}}" data-dtype="Boolean">
                           <div class="talent-name" data-title="{{localTalent line.[1].title}}" data-num="{{line.[1].num}}" data-id="{{line.[1].id}}" data-stop="{{line.[1].fear}}">{{localTalent line.[1].title}} / {{line.[1].num}}</div>
@@ -202,7 +202,7 @@
                       <td {{#if ../system.talent.gap.[2]}} class="active" {{/if}}></td>
 
                       <td class="{{#if line.[2].state}} checked {{/if}} {{#if line.[2].fear}} feared {{/if}} {{#if line.[2].subTitle}} subTitle {{/if}}" >
-                          <input class="talent-checkbox" type="checkbox" name="{{line.[2].name}}.state" {{#if line.[2].state}} checked {{/if}} >
+                          <input class="talent-checkbox" type="checkbox" name="{{line.[2].name}}.state" {{#if line.[2].state}} checked {{/if}} data-dtype="Boolean">
                           <input type="hidden" name="{{line.[2].name}}.num" value="{{line.[2].num}}">
                           <input type="hidden" name="{{line.[2].name}}.fear" value="{{line.[2].fear}}" data-dtype="Boolean">
                           <div class="talent-name" data-title="{{localTalent line.[2].title}}" data-num="{{line.[2].num}}" data-id="{{line.[2].id}}" data-stop="{{line.[2].fear}}">{{localTalent line.[2].title}} / {{line.[2].num}}</div>
@@ -211,7 +211,7 @@
                       <td {{#if ../system.talent.gap.[3]}} class="active" {{/if}}></td>
 
                       <td class="{{#if line.[3].state}} checked {{/if}} {{#if line.[3].fear}} feared {{/if}} {{#if line.[3].subTitle}} subTitle {{/if}}" >
-                          <input class="talent-checkbox" type="checkbox" name="{{line.[3].name}}.state" {{#if line.[3].state}} checked {{/if}} >
+                          <input class="talent-checkbox" type="checkbox" name="{{line.[3].name}}.state" {{#if line.[3].state}} checked {{/if}} data-dtype="Boolean">
                           <input type="hidden" name="{{line.[3].name}}.num" value="{{line.[3].num}}">
                           <input type="hidden" name="{{line.[3].name}}.fear" value="{{line.[3].fear}}" data-dtype="Boolean">
                           <div class="talent-name" data-title="{{localTalent line.[3].title}}" data-num="{{line.[3].num}}" data-id="{{line.[3].id}}" data-stop="{{line.[3].fear}}">{{localTalent line.[3].title}} / {{line.[3].num}}</div>
@@ -220,7 +220,7 @@
                       <td {{#if ../system.talent.gap.[4]}} class="active" {{/if}}></td>
 
                       <td class="{{#if line.[4].state}} checked {{/if}} {{#if line.[4].fear}} feared {{/if}} {{#if line.[4].subTitle}} subTitle {{/if}}" >
-                          <input class="talent-checkbox" type="checkbox" name="{{line.[4].name}}.state" {{#if line.[4].state}} checked {{/if}} >
+                          <input class="talent-checkbox" type="checkbox" name="{{line.[4].name}}.state" {{#if line.[4].state}} checked {{/if}} data-dtype="Boolean">
                           <input type="hidden" name="{{line.[4].name}}.num" value="{{line.[4].num}}">
                           <input type="hidden" name="{{line.[4].name}}.fear" value="{{line.[4].fear}}" data-dtype="Boolean">
                           <div class="talent-name" data-title="{{localTalent line.[4].title}}" data-num="{{line.[4].num}}" data-id="{{line.[4].id}}" data-stop="{{line.[4].fear}}">{{localTalent line.[4].title}} / {{line.[4].num}}</div>
@@ -229,7 +229,7 @@
                       <td {{#if ../system.talent.gap.[5]}} class="active" {{/if}}></td>
 
                       <td class="{{#if line.[5].state}} checked {{/if}} {{#if line.[5].fear}} feared {{/if}} {{#if line.[5].subTitle}} subTitle {{/if}}" >
-                          <input class="talent-checkbox" type="checkbox" name="{{line.[5].name}}.state" {{#if line.[5].state}} checked {{/if}} >
+                          <input class="talent-checkbox" type="checkbox" name="{{line.[5].name}}.state" {{#if line.[5].state}} checked {{/if}} data-dtype="Boolean">
                           <input type="hidden" name="{{line.[5].name}}.num" value="{{line.[5].num}}">
                           <input type="hidden" name="{{line.[5].name}}.fear" value="{{line.[5].fear}}" data-dtype="Boolean">
                           <div class="talent-name" data-title="{{localTalent line.[5].title}}" data-num="{{line.[5].num}}" data-id="{{line.[5].id}}" data-stop="{{line.[5].fear}}">{{localTalent line.[5].title}} / {{line.[5].num}}</div>
