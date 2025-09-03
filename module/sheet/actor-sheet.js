@@ -98,6 +98,12 @@ export class InsaneActorSheet extends ActorSheet {
   activateListeners(html) {
     super.activateListeners(html);
 
+    // When the checkbox changes, save immediately and re-render (without closing the sheet).
+    html.find('input.talent-checkbox').on('change', ev => {
+       ev.preventDefault();
+       this.submit({ preventClose: true });
+    });
+
     // Talent
     html.find('.item-label').click(this._showItemDetails.bind(this));
     html.find(".echo-item").click(this._echoItemDescription.bind(this));
